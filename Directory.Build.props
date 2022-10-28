@@ -1,7 +1,7 @@
 <Project>
   <!--Build Properties-->
   <PropertyGroup>
-    <LangVersion>11.0</LangVersion>
+    <LangVersion>10.0</LangVersion>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	<!--<EnablePreviewFeatures>True</EnablePreviewFeatures>-->

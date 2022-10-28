@@ -114,8 +114,7 @@ namespace ClusterF_ck.DBSCAN
                         ref int iPId = ref context.ClusterIds[iP.Item2];
 
                         // If unclassified or noise, add to cluster
-                        if (iPId == DBSConstants.UNCLASSIFIED_ID ||
-                            iPId == DBSConstants.NOISE_ID)
+                        if (iPId is DBSConstants.UNCLASSIFIED_ID or DBSConstants.NOISE_ID)
                         {
                             // If unclassified, add to search queue
                             if (iPId == DBSConstants.UNCLASSIFIED_ID) seeds.Add(iP);
@@ -130,7 +129,7 @@ namespace ClusterF_ck.DBSCAN
             }
         }
 
-        private unsafe static List<(T, int)> GetSeeds<T, TShape>(
+        private static unsafe List<(T, int)> GetSeeds<T, TShape>(
             T p,
             DBSContext<T, TShape> context)
             where T : unmanaged

@@ -8,12 +8,12 @@ namespace ClusterF_ck.DBSCAN
     public static class DBSConstants
     {
         /// <summary>
-        /// The Id that indicates a point is noise.
+        /// The cluster id that indicates a point is noise.
         /// </summary>
         public const int NOISE_ID = -1;
 
         /// <summary>
-        /// The Id that indicates a point is unclassified.
+        /// The cluster id that indicates a point is unclassified.
         /// </summary>
         public const int UNCLASSIFIED_ID = 0;
     }

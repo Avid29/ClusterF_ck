@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFrameworks>net472;netcoreapp3.1;net6.0</TargetFrameworks>
+	  <TargetFrameworks>netcoreapp3.1;net6.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -13,6 +13,12 @@
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.8" />
     <PackageReference Include="coverlet.collector" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ClusterF_ck\ClusterF_ck.csproj" />
+    <ProjectReference Include="..\..\src\ClusterF_uck.Base\ClusterF_ck.Base.csproj" />
+    <ProjectReference Include="..\ClusterF_ck.Tests.Data\ClusterF_ck.Tests.Data.csproj" />
   </ItemGroup>
 
 </Project>

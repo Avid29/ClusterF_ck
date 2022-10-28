@@ -1,6 +1,7 @@
 ﻿// Adam Dernis © 2022
 
 using ClusterF_ck.Spaces;
+using CommunityToolkit.HighPerformance.Helpers;
 using System.Numerics;
 
 namespace ClusterF_ck.Shapes
@@ -8,7 +9,7 @@ namespace ClusterF_ck.Shapes
     /// <summary>
     /// A shape defining how to handle <see cref="Vector2"/>s in a geometric space.
     /// </summary>
-    public struct Vector2Shape : IGeometricSpace<Vector2>
+    public struct Vector2Shape : IGeometricSpace<Vector2, (int, int)>
     {
         /// <inheritdoc/>
         public bool AreEqual(Vector2 it1, Vector2 it2)
@@ -32,6 +33,24 @@ namespace ClusterF_ck.Shapes
         public double FindDistanceSquared(Vector2 it1, Vector2 it2)
         {
             return (it1 - it2).LengthSquared();
+        }
+
+        /// <inheritdoc/>
+        public (int, int) GetCell(Vector2 value, double window)
+        {
+            var cell = value / (float)window;
+            return ((int)cell.X, (int)cell.Y);
+        }
+
+        /// <inheritdoc/>
+        public Vector2 GetCellCenter((int, int) cell, double window)
+        {
+            Vector2 cellScale = new(cell.Item1, cell.Item2);
+            cellScale *= (float)window;
+
+            var offset = new Vector2((float)(window / 2));
+
+            return cellScale + offset;
         }
 
         /// <inheritdoc/>

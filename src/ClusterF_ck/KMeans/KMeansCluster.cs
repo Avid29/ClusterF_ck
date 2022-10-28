@@ -6,11 +6,12 @@ using ClusterF_ck.Spaces.Properties;
 using System.Collections.Generic;
 
 namespace ClusterF_ck.KMeans
-{/// <summary>
- /// A <see cref="Cluster{T, TShape}"/> implementation for KMeans.
- /// </summary>
- /// <typeparam name="T">The type of data in the cluster.</typeparam>
- /// <typeparam name="TShape">A shape to describe to provide comparison methods for <typeparamref name="T"/>.</typeparam>
+{
+    /// <summary>
+    /// A <see cref="Cluster{T, TShape}"/> implementation for KMeans.
+    /// </summary>
+    /// <typeparam name="T">The type of data in the cluster.</typeparam>
+    /// <typeparam name="TShape">A shape to describe to provide comparison methods for <typeparamref name="T"/>.</typeparam>
     public class KMeansCluster<T, TShape> : Cluster<T, TShape>, ICentroidCluster<T>, IPointsCluster<T>, IWeightedCluster
         where T : unmanaged
         where TShape : struct, IDistanceSpace<T>, IAverageSpace<T>
@@ -20,7 +21,7 @@ namespace ClusterF_ck.KMeans
         /// <summary>
         /// Initializes a new instance of the <see cref="KMeansCluster{T, TShape}"/> class.
         /// </summary>
-        public KMeansCluster()
+        internal KMeansCluster()
         {
         }
 
@@ -53,7 +54,7 @@ namespace ClusterF_ck.KMeans
         /// Adds a point to the <see cref="KMeansCluster{T, TShape}"/>.
         /// </summary>
         /// <param name="item">The item to add.</param>
-        public void Add(T item)
+        internal void Add(T item)
         {
             Points.Add(item);
             _centroid = null;
@@ -64,7 +65,7 @@ namespace ClusterF_ck.KMeans
         /// </summary>
         /// <param name="index">The index of the element to remove.</param>
         /// <returns>The removed item.</returns>
-        public T RemoveAt(int index)
+        internal T RemoveAt(int index)
         {
             T removed = Points[index];
             Points.RemoveAt(index);

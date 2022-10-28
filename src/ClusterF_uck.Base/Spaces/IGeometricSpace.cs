@@ -11,7 +11,8 @@ namespace ClusterF_ck.Spaces
     /// Geometric points are defined by their absolute positions in space.
     /// </remarks>
     /// <typeparam name="T">The type being wrapped by the implementation.</typeparam>
-    public interface IGeometricSpace<T> : ISpace<T>, IMetricSpace<T>, IAverageSpace<T>, IWeightedAverageSpace<T>
+    /// <typeparam name="TCell">The type indicating the cell a point belongs to in a grid space.</typeparam>
+    public interface IGeometricSpace<T, TCell> : ISpace<T>, IMetricSpace<T>, IAverageSpace<T>, IWeightedAverageSpace<T>, IGridSpace<T, TCell>
     {
     }
 }

@@ -8,7 +8,7 @@ namespace ClusterF_ck.Shapes
     /// <summary>
     /// A shape defining how to handle <see cref="double"/>s in a geometric space.
     /// </summary>
-    public struct DoubleShape : IGeometricSpace<double>
+    public struct DoubleShape : IGeometricSpace<double, int>
     {
         /// <inheritdoc/>
         public bool AreEqual(double it1, double it2)
@@ -34,6 +34,14 @@ namespace ClusterF_ck.Shapes
         {
             return Math.Abs(it1 - it2);
         }
+
+        /// <inheritdoc/>
+        public int GetCell(double value, double window)
+             => (int)(value / window);
+
+        /// <inheritdoc/>
+        public double GetCellCenter(int cell, double window)
+            => (cell * window) + (window / 2);
 
         /// <inheritdoc/>
         public double WeightedAverage((double, double)[] items)

@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Generation\Gradients\" />
+    <PackageReference Include="System.Numerics.Vectors" Version="4.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ClusterF_ck\ClusterF_ck.csproj" />
+    <ProjectReference Include="..\..\src\ClusterF_uck.Base\ClusterF_ck.Base.csproj" />
   </ItemGroup>
 
 </Project>

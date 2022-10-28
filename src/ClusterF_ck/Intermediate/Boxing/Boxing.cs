@@ -69,7 +69,7 @@ namespace ClusterF_ck.Intermediate.Boxing
             TShape shape = default)
             where T : unmanaged
             where TCell : unmanaged
-            where TShape : struct, IGridSpace<T, TCell>
+            where TShape : struct, IGridSpace<T, TCell>, IAverageSpace<T>
         {
             var cells = new Dictionary<TCell, BoxingCluster<T, TCell, TShape>>();
             foreach (var point in points)
@@ -78,7 +78,7 @@ namespace ClusterF_ck.Intermediate.Boxing
                 if (!cells.ContainsKey(cell))
                 {
                     var center = shape.GetCellCenter(cell, window);
-                    cells.Add(cell, new BoxingCluster<T, TCell, TShape>(cell, center));
+                    cells.Add(cell, new BoxingCluster<T, TCell, TShape>(cell, center, shape));
                 }
 
                 cells[cell].Points.Add(point);

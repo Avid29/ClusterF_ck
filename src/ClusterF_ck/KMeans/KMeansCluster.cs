@@ -34,7 +34,7 @@ namespace ClusterF_ck.KMeans
         /// <summary>
         /// Gets a list of points in the cluster.
         /// </summary>
-        internal List<T> Points { get; } = new List<T>();
+        internal List<T> Points { get; } = new();
 
         /// <inheritdoc/>
         public double Weight => Points.Count;

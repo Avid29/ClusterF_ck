@@ -13,18 +13,22 @@ namespace ClusterF_ck.Intermediate.Boxing
     /// <typeparam name="T">The type of data in the cluster.</typeparam>
     /// <typeparam name="TCell">The type of cell identifier</typeparam>
     /// <typeparam name="TShape">A shape to describe to provide comparison methods for <typeparamref name="T"/>.</typeparam>
-    public class BoxingCluster<T, TCell, TShape> : Cluster<T, TShape>, IPointsCluster<T>, IWeightedCluster
+    public class BoxingCluster<T, TCell, TShape> : Cluster<T, TShape>, ICentroidCluster<T>, IPointsCluster<T>, IWeightedCluster
         where T : unmanaged
         where TCell : unmanaged
-        where TShape : struct, IGridSpace<T, TCell>
+        where TShape : struct, IGridSpace<T, TCell>, IAverageSpace<T>
     {
+        private TShape _shape;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BoxingCluster{T, TCell, TShape}"/> class.
         /// </summary>
         /// <param name="cell">The cell identify.</param>
         /// <param name="center">The center point of the cell.</param>
-        internal BoxingCluster(TCell cell, T center)
+        internal BoxingCluster(TCell cell, T center, TShape shape = default)
         {
+            _shape = shape;
+
             Cell = cell;
             Center = center;
         }
@@ -40,6 +44,9 @@ namespace ClusterF_ck.Intermediate.Boxing
         public T Center { get; }
 
         /// <inheritdoc/>
+        public T Centroid => _shape.Average(Points.ToArray());
+
+        /// <inheritdoc/>
         public double Weight => Points.Count;
 
         /// <inheritdoc/>
@@ -48,6 +55,6 @@ namespace ClusterF_ck.Intermediate.Boxing
         /// <summary>
         /// Gets a list of points in the cluster.
         /// </summary>
-        internal List<T> Points { get; } = new List<T>();
+        internal List<T> Points { get; } = new();
     }
 }

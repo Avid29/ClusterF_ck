@@ -1,0 +1,20 @@
+<Project>
+  <!--Build Properties-->
+  <PropertyGroup>
+    <LangVersion>11.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<!--<EnablePreviewFeatures>True</EnablePreviewFeatures>-->
+	<GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <!--Nuget Metadata-->
+  <PropertyGroup>
+	<Authors>Adam Dernis</Authors>
+	<RepositoryType>Git</RepositoryType>
+	<RepositoryUrl>https://github.com/Avid29/Cluster_Fuck</RepositoryUrl>
+	<Version>0.1.0-alpha3</Version>
+	<Company>Adam Dernis</Company>
+  </PropertyGroup>
+</Project>

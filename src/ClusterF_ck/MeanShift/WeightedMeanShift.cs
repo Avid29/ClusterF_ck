@@ -19,7 +19,7 @@ namespace ClusterF_ck.MeanShift
         private const double ACCEPTED_ERROR = 0.000005;
 
         /// <inheritdoc cref="Cluster{T, TShape, TKernel}(ReadOnlySpan{T}, ReadOnlySpan{T}, TKernel, TShape)"/>
-        public static List<MSCluster<T, TShape>> Cluster<T, TShape, TKernel>(
+        public static List<MeanShiftCluster<T, TShape>> Cluster<T, TShape, TKernel>(
             ReadOnlySpan<T> points,
             TKernel kernel,
             TShape shape = default)
@@ -41,7 +41,7 @@ namespace ClusterF_ck.MeanShift
         /// <param name="kernel">The kernel to use for clustering.</param>
         /// <param name="shape">The shape to use on the points to cluster.</param>
         /// <returns>A list of clusters weighted by the contributing points.</returns>
-        public static List<MSCluster<T, TShape>> Cluster<T, TShape, TKernel>(
+        public static List<MeanShiftCluster<T, TShape>> Cluster<T, TShape, TKernel>(
             ReadOnlySpan<T> points,
             ReadOnlySpan<T> field,
             TKernel kernel,
@@ -51,7 +51,7 @@ namespace ClusterF_ck.MeanShift
             where TKernel : struct, IKernel => Wrap<T, TShape>(ClusterRaw(points, field, kernel, shape));
 
         /// <inheritdoc cref="Cluster{T, TShape, TKernel}(ReadOnlySpan{(T, double)}, ReadOnlySpan{(T, double)}, TKernel, TShape)"/>
-        public static List<MSCluster<T, TShape>> Cluster<T, TShape, TKernel>(
+        public static List<MeanShiftCluster<T, TShape>> Cluster<T, TShape, TKernel>(
             ReadOnlySpan<(T, double)> points,
             TKernel kernel,
             TShape shape = default)
@@ -70,7 +70,7 @@ namespace ClusterF_ck.MeanShift
         /// <param name="kernel">The kernel to use for clustering.</param>
         /// <param name="shape">The shape to use on the points to cluster.</param>
         /// <returns>A list of clusters weighted by the contributing points.</returns>
-        public static List<MSCluster<T, TShape>> Cluster<T, TShape, TKernel>(
+        public static List<MeanShiftCluster<T, TShape>> Cluster<T, TShape, TKernel>(
             ReadOnlySpan<(T, double)> points,
             ReadOnlySpan<(T, double)> field,
             TKernel kernel,
@@ -104,7 +104,7 @@ namespace ClusterF_ck.MeanShift
             where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
             where TKernel : struct, IKernel
         {
-            // Points will bed cloned into a modifiable list of clusters
+            // Points will be cloned into a modifiable list of clusters
             (T, double)[] clusters = new (T, double)[points.Length];
 
             // This array will be reused on every iteration
@@ -148,16 +148,16 @@ namespace ClusterF_ck.MeanShift
         }
 
         /// <summary>
-        /// Takes an array of points and tuples and converts them to <see cref="MSCluster{T, TShape}"/>s.
+        /// Takes an array of points and tuples and converts them to <see cref="MeanShiftCluster{T,TShape}"/>s.
         /// </summary>
-        private static List<MSCluster<T, TShape>> Wrap<T, TShape>((T, double)[] raw)
+        private static List<MeanShiftCluster<T, TShape>> Wrap<T, TShape>((T, double)[] raw)
             where T : unmanaged, IEquatable<T>
             where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
         {
-            List<MSCluster<T, TShape>> clusters = new();
+            List<MeanShiftCluster<T, TShape>> clusters = new();
             foreach (var cluster in raw)
             {
-                clusters.Add(new MSCluster<T, TShape>(cluster.Item1, cluster.Item2));
+                clusters.Add(new MeanShiftCluster<T, TShape>(cluster.Item1, cluster.Item2));
             }
 
             return clusters;

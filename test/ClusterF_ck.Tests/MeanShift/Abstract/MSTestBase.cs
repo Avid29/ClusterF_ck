@@ -11,7 +11,7 @@ namespace ClusterF_ck.Tests.MeanShift.Abstract
 {
     public abstract class MSTestBase
     {
-        protected List<MSCluster<T, TShape>> Run<T, TShape, TKernel>(DataSet<T> data, TKernel kernel, TShape shape = default)
+        protected List<MeanShiftCluster<T, TShape>> Run<T, TShape, TKernel>(DataSet<T> data, TKernel kernel, TShape shape = default)
             where T : unmanaged, IEquatable<T>
             where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
             where TKernel : struct, IKernel => MS.Cluster<T, TShape, TKernel>(data.Data, kernel, shape);

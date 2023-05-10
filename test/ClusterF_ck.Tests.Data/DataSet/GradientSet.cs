@@ -1,10 +1,10 @@
 ﻿// Adam Dernis © 2022
 
 using ClusterF_ck.Tests.Data.DataSet.Abstract;
-using ClusterF_ck.Tests.Data.Generation.Gradients.Shapes;
 using ClusterF_ck.Tests.Data.Generation.Gradients;
 using ClusterF_ck.Tests.Data.Generation.Gradients.Easing;
 using ClusterF_ck.Tests.Data.Generation.Gradients.Easing.Enums;
+using ClusterF_ck.Tests.Data.Generation.Gradients.Shapes;
 using System.Numerics;
 
 namespace ClusterF_ck.Tests.Data.DataSet

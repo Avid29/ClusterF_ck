@@ -1,9 +1,7 @@
 ﻿// Adam Dernis © 2022
 
-using ClusterF_ck.Spaces;
 using ClusterF_ck.Spaces.Properties;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ClusterF_ck.Intermediate.Boxing
 {

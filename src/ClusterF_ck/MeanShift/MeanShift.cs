@@ -10,12 +10,14 @@ namespace ClusterF_ck.MeanShift
 {
     public static partial class MeanShift
     {
+        #region ReadOnlySpan
+
         /// <summary>
         /// Clusters a set of points using MeanShift over a field.
         /// </summary>
         /// <remarks>
         /// It is usually wise to use <see cref="WeightedMeanShift.Cluster{T, TShape, TKernel}(ReadOnlySpan{T}, ReadOnlySpan{T}, TKernel, TShape)"/> instead unless all points are unique.
-        /// Weighted MeanShift greatly reduces computation time when dealing with duplicate points.
+        /// Weighted MeanShift greatly reduces computation time for duplicate points.
         /// </remarks>
         /// <typeparam name="T">The type of points to cluster.</typeparam>
         /// <typeparam name="TShape">The type of shape to use on the points to cluster.</typeparam>
@@ -48,6 +50,10 @@ namespace ClusterF_ck.MeanShift
             where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
             where TKernel : struct, IKernel => Cluster(points, points, kernel, shape);
 
+        #endregion
+
+        #region Array
+
         /// <inheritdoc cref="Cluster{T, TShape, TKernel}(ReadOnlySpan{T}, ReadOnlySpan{T}, TKernel, TShape)"/>
         public static List<MeanShiftCluster<T, TShape>> Cluster<T, TShape, TKernel>(
             T[] points,
@@ -67,7 +73,11 @@ namespace ClusterF_ck.MeanShift
             where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
             where TKernel : struct, IKernel => Cluster<T, TShape, TKernel>(points.AsSpan(), kernel, shape);
 
-        #if NET6_0_OR_GREATER
+        #endregion
+
+        #region List
+
+#if NET6_0_OR_GREATER
 
         /// <inheritdoc cref="Cluster{T, TShape, TKernel}(ReadOnlySpan{T}, ReadOnlySpan{T}, TKernel, TShape)"/>
         public static List<MeanShiftCluster<T, TShape>> Cluster<T, TShape, TKernel>(
@@ -88,6 +98,7 @@ namespace ClusterF_ck.MeanShift
             where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
             where TKernel : struct, IKernel => Cluster<T, TShape, TKernel>(points.AsSpan(), kernel, shape);
 
-        #endif
+#endif
+        #endregion
     }
 }

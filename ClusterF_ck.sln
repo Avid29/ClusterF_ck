@@ -17,7 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A2CE842B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClusterF_ck.Tests", "test\ClusterF_ck.Tests\ClusterF_ck.Tests.csproj", "{FC861702-AE72-43FA-B38E-4F27A55B68DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClusterF_ck.Tests.Data", "test\ClusterF_ck.Tests.Data\ClusterF_ck.Tests.Data.csproj", "{CAC41AE2-6724-4AEA-9E81-0D7820A3BFB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClusterF_ck.Tests.Data", "test\ClusterF_ck.Tests.Data\ClusterF_ck.Tests.Data.csproj", "{CAC41AE2-6724-4AEA-9E81-0D7820A3BFB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClusterF_ck.Evaluation", "src\ClusterF_ck.Evaluation\ClusterF_ck.Evaluation.csproj", "{AB4E8D82-B5C3-4E42-B3E5-687002680BF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{CAC41AE2-6724-4AEA-9E81-0D7820A3BFB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAC41AE2-6724-4AEA-9E81-0D7820A3BFB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAC41AE2-6724-4AEA-9E81-0D7820A3BFB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB4E8D82-B5C3-4E42-B3E5-687002680BF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB4E8D82-B5C3-4E42-B3E5-687002680BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB4E8D82-B5C3-4E42-B3E5-687002680BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB4E8D82-B5C3-4E42-B3E5-687002680BF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

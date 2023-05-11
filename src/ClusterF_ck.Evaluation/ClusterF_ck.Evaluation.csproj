@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClusterF_uck.Base\ClusterF_ck.Base.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Intermediate\" />
+  </ItemGroup>
+
+</Project>

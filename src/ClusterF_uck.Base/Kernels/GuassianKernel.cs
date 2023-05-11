@@ -2,58 +2,56 @@
 
 using System;
 
-namespace ClusterF_ck.Kernels
+namespace ClusterF_ck.Kernels;
+
+/// The shape of a Gaussian Distribution
+/// 
+///                *
+///              *   *
+///             *     *
+///            *       *
+///           *         *
+///        *               *
+///  *                           *
+///  -----------------------------
+/// <summary>
+/// A Kernel with a gaussian falloff.
+/// </summary>
+public struct GaussianKernel : IKernel
 {
-    /// The shape of a Gaussian Distribution
-    /// 
-    ///                *
-    ///              *   *
-    ///             *     *
-    ///            *       *
-    ///           *         *
-    ///        *               *
-    ///  *                           *
-    ///  -----------------------------
+    private double _denominatorBandwidth;
+    private double _bandwidth;
 
     /// <summary>
-    /// A Kernel with a gaussian falloff.
+    /// Initializes a new instance of the <see cref="GaussianKernel"/> struct.
     /// </summary>
-    public struct GaussianKernel : IKernel
+    /// <param name="bandwidth">The bandwidth of the <see cref="GaussianKernel"/>.</param>
+    public GaussianKernel(double bandwidth)
     {
-        private double _denominatorBandwidth;
-        private double _bandwidth;
+        // These will be set in WindowSize
+        _bandwidth = 0;
+        _denominatorBandwidth = 0;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GaussianKernel"/> struct.
-        /// </summary>
-        /// <param name="bandwidth">The bandwidth of the <see cref="GaussianKernel"/>.</param>
-        public GaussianKernel(double bandwidth)
+        WindowSize = bandwidth;
+    }
+
+    /// <inheritdoc/>
+    public double WindowSize
+    {
+        get => _bandwidth;
+        set
         {
-            // These will be set in WindowSize
-            _bandwidth = 0;
-            _denominatorBandwidth = 0;
-
-            WindowSize = bandwidth;
+            _bandwidth = value;
+            _denominatorBandwidth = value * value * -2;
         }
+    }
 
-        /// <inheritdoc/>
-        public double WindowSize
-        {
-            get => _bandwidth;
-            set
-            {
-                _bandwidth = value;
-                _denominatorBandwidth = value * value * -2;
-            }
-        }
+    /// <inheritdoc/>
+    public double WeightDistance(double distanceSquared)
+    {
+        // Unoptimized equivalent.
+        // return Math.Pow(Math.E, -.5 * distanceSquared / (_bandwidth * _bandwidth);
 
-        /// <inheritdoc/>
-        public double WeightDistance(double distanceSquared)
-        {
-            // Unoptimized equivalent.
-            // return Math.Pow(Math.E, -.5 * distanceSquared / (_bandwidth * _bandwidth);
-
-            return Math.Exp(distanceSquared / _denominatorBandwidth);
-        }
+        return Math.Exp(distanceSquared / _denominatorBandwidth);
     }
 }

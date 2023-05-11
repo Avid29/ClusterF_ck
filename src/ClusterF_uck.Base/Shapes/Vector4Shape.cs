@@ -11,6 +11,9 @@ namespace ClusterF_ck.Shapes
     public struct Vector4Shape : IGeometricSpace<Vector4, (int, int, int, int)>
     {
         /// <inheritdoc/>
+        public double Window { get; set; }
+
+        /// <inheritdoc/>
         public bool AreEqual(Vector4 it1, Vector4 it2)
         {
             return it1 == it2;
@@ -35,21 +38,17 @@ namespace ClusterF_ck.Shapes
         }
 
         /// <inheritdoc/>
-        public (int, int, int, int) GetCell(Vector4 value, double window)
+        public (int, int, int, int) GetCell(Vector4 value)
         {
-            var cell = value / (float)window;
+            var cell = value / (float)Window;
             return ((int)cell.W, (int)cell.X, (int)cell.Y, (int)cell.Z);
         }
 
         /// <inheritdoc/>
-        public Vector4 GetCellCenter((int, int, int, int) cell, double window)
+        public Vector4 GetCellOrigin((int, int, int, int) cell)
         {
             Vector4 cellScale = new(cell.Item1, cell.Item2, cell.Item3, cell.Item4);
-            cellScale *= (float)window;
-
-            var offset = new Vector4((float)(window / 2));
-
-            return cellScale + offset;
+            return cellScale * (float)Window;
         }
 
         /// <inheritdoc/>

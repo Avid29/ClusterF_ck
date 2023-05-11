@@ -1,7 +1,6 @@
 ﻿// Adam Dernis © 2022
 
 using ClusterF_ck.Spaces;
-using CommunityToolkit.HighPerformance.Helpers;
 using System.Numerics;
 
 namespace ClusterF_ck.Shapes
@@ -12,10 +11,11 @@ namespace ClusterF_ck.Shapes
     public struct Vector2Shape : IGeometricSpace<Vector2, (int, int)>
     {
         /// <inheritdoc/>
+        public double Window { get; set; }
+
+        /// <inheritdoc/>
         public bool AreEqual(Vector2 it1, Vector2 it2)
-        {
-            return it1 == it2;
-        }
+            => it1 == it2;
 
         /// <inheritdoc/>
         public Vector2 Average(Vector2[] items)
@@ -36,21 +36,17 @@ namespace ClusterF_ck.Shapes
         }
 
         /// <inheritdoc/>
-        public (int, int) GetCell(Vector2 value, double window)
+        public (int, int) GetCell(Vector2 value)
         {
-            var cell = value / (float)window;
+            var cell = value / (float)Window;
             return ((int)cell.X, (int)cell.Y);
         }
 
         /// <inheritdoc/>
-        public Vector2 GetCellCenter((int, int) cell, double window)
+        public Vector2 GetCellOrigin((int, int) cell)
         {
             Vector2 cellScale = new(cell.Item1, cell.Item2);
-            cellScale *= (float)window;
-
-            var offset = new Vector2((float)(window / 2));
-
-            return cellScale + offset;
+            return cellScale * (float)Window;
         }
 
         /// <inheritdoc/>

@@ -10,11 +10,14 @@ namespace ClusterF_ck.Shapes
     /// </summary>
     public struct DoubleShape : IGeometricSpace<double, int>
     {
+        private const double TOLERANCE = 0.000005;
+
+        /// <inheritdoc/>
+        public double Window { get; set; }
+
         /// <inheritdoc/>
         public bool AreEqual(double it1, double it2)
-        {
-            return it1 == it2;
-        }
+            => Math.Abs(it1 - it2) < TOLERANCE;
 
         /// <inheritdoc/>
         public double Average(double[] items)
@@ -31,17 +34,15 @@ namespace ClusterF_ck.Shapes
 
         /// <inheritdoc/>
         public double FindDistanceSquared(double it1, double it2)
-        {
-            return Math.Abs(it1 - it2);
-        }
+            => Math.Abs(it1 - it2);
 
         /// <inheritdoc/>
-        public int GetCell(double value, double window)
-             => (int)(value / window);
+        public int GetCell(double value)
+             => (int)(value / Window);
 
         /// <inheritdoc/>
-        public double GetCellCenter(int cell, double window)
-            => (cell * window) + (window / 2);
+        public double GetCellOrigin(int cell)
+            => (cell * Window);
 
         /// <inheritdoc/>
         public double WeightedAverage((double, double)[] items)

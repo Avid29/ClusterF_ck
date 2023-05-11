@@ -4,16 +4,18 @@ using ClusterF_ck.Spaces;
 using System.Numerics;
 
 namespace ClusterF_ck.Shapes
-{/// <summary>
- /// A shape defining how to handle <see cref="Vector3"/>s in a geometric space.
- /// </summary>
+{
+    /// <summary>
+    /// A shape defining how to handle <see cref="Vector3"/>s in a geometric space.
+    /// </summary>
     public struct Vector3Shape : IGeometricSpace<Vector3, (int, int, int)>
     {
         /// <inheritdoc/>
+        public double Window { get; set; }
+
+        /// <inheritdoc/>
         public bool AreEqual(Vector3 it1, Vector3 it2)
-        {
-            return it1 == it2;
-        }
+            => it1 == it2;
 
         /// <inheritdoc/>
         public Vector3 Average(Vector3[] items)
@@ -34,21 +36,17 @@ namespace ClusterF_ck.Shapes
         }
 
         /// <inheritdoc/>
-        public (int, int, int) GetCell(Vector3 value, double window)
+        public (int, int, int) GetCell(Vector3 value)
         {
-            var cell = value / (float)window;
+            var cell = value / (float)Window;
             return ((int)cell.X, (int)cell.Y, (int)cell.Z);
         }
 
         /// <inheritdoc/>
-        public Vector3 GetCellCenter((int, int, int) cell, double window)
+        public Vector3 GetCellOrigin((int, int, int) cell)
         {
             Vector3 cellScale = new(cell.Item1, cell.Item2, cell.Item3);
-            cellScale *= (float)window;
-
-            var offset = new Vector3((float)(window / 2));
-
-            return cellScale + offset;
+            return cellScale * (float)Window;
         }
 
         /// <inheritdoc/>

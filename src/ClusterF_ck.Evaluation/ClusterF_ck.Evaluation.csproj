@@ -8,8 +8,4 @@
     <ProjectReference Include="..\ClusterF_uck.Base\ClusterF_ck.Base.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Intermediate\" />
-  </ItemGroup>
-
 </Project>

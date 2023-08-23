@@ -15,27 +15,24 @@ public static class DaviesBouldin
         where TCluster : ICentroidCluster<T>, IPointsCluster<T>
         where TShape : struct, IDistanceSpace<T>
     {
-        var intraDistances = new double[clusters.Count];
-
+        // Track the intracluster distance of each cluster
+        // The intracluster distance is the average distance of a point from the centroid.
+        var clusterIntraDistances = new double[clusters.Count];
+        
+        // Calculate intracluster distance of each cluster
         int i = 0;
         foreach (var cluster in clusters)
         {
-            intraDistances[i] = cluster.Points.Average(x => shape.FindDistanceSquared(cluster.Centroid, x));
+            clusterIntraDistances[i] = cluster.Points.Average(x => Math.Sqrt(shape.FindDistanceSquared(cluster.Centroid, x)));
             i++;
         }
 
-        var pairwiseDistances = new Dictionary<(TCluster, TCluster), double>();
-        foreach (var cluster1 in clusters)
-        {
-            foreach (var cluster2 in clusters)
-            {
-                if (cluster1.Equals(cluster2))
-                    continue;
 
-                pairwiseDistances.Add((cluster1, cluster2),
-                    shape.FindDistanceSquared(cluster1.Centroid, cluster2.Centroid));
-            }
-        }
+        i = 0;
+        //foreach ()
+        //{
+
+        //}
 
         return 0;
     }

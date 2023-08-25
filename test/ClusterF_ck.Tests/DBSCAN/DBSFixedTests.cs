@@ -16,18 +16,18 @@ namespace ClusterF_ck.Tests.DBSCAN
         public void DoubleTest1()
         {
             var data = FixedSets.Double_Test1;
-            var config = new DBSConfig<double, DoubleShape>(2, 1, true);
+            var config = new DBSConfig(2, 1, true);
 
-            Run(data, config);
+            Run<double, DoubleShape>(data, config);
         }
 
         [TestMethod("Vector2 Test 1")]
         public void Vector2Test1()
         {
             var data = FixedSets.Vector2_Test1;
-            var config = new DBSConfig<Vector2, Vector2Shape>(2, 1, true);
+            var config = new DBSConfig(2, 1, true);
 
-            Run(data, config);
+            Run<Vector2, Vector2Shape>(data, config);
         }
     }
 }

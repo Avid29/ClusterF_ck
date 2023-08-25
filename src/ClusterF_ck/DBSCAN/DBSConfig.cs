@@ -1,6 +1,5 @@
 ﻿// Adam Dernis © 2022
 
-using ClusterF_ck.Spaces.Properties;
 using CommunityToolkit.Diagnostics;
 
 namespace ClusterF_ck.DBSCAN;
@@ -8,14 +7,10 @@ namespace ClusterF_ck.DBSCAN;
 /// <summary>
 /// A struct containing configuration info for DBSCAN Cluster to run.
 /// </summary>
-/// <typeparam name="T">The type of data in the cluster.</typeparam>
-/// <typeparam name="TShape">The type of shape to use on the points while clustering.</typeparam>
-public struct DBSConfig<T, TShape>
-    where T : unmanaged
-    where TShape : struct, IDistanceSpace<T>
+public struct DBSConfig
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="DBSConfig{T, TShape}"/> struct.
+    /// Initializes a new instance of the <see cref="DBSConfig"/> struct.
     /// </summary>
     /// <param name="eps">The maximum distance designated as a connected point.</param>
     /// <param name="minPts">The minimum number of points to form a region.</param>

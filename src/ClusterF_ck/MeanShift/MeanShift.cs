@@ -32,7 +32,7 @@ public static partial class MeanShift
         ReadOnlySpan<T> field,
         TKernel kernel,
         TShape shape = default)
-        where T : unmanaged, IEquatable<T>
+        where T : IEquatable<T>
         where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
         where TKernel : struct, IKernel
     {
@@ -45,7 +45,7 @@ public static partial class MeanShift
         ReadOnlySpan<T> points,
         TKernel kernel,
         TShape shape = default)
-        where T : unmanaged, IEquatable<T>
+        where T : IEquatable<T>
         where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
         where TKernel : struct, IKernel => Cluster(points, points, kernel, shape);
 
@@ -59,7 +59,7 @@ public static partial class MeanShift
         T[] field,
         TKernel kernel,
         TShape shape = default)
-        where T : unmanaged, IEquatable<T>
+        where T : IEquatable<T>
         where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
         where TKernel : struct, IKernel => Cluster<T, TShape, TKernel>(points.AsSpan(), field.AsSpan(), kernel, shape);
 
@@ -68,7 +68,7 @@ public static partial class MeanShift
         T[] points,
         TKernel kernel,
         TShape shape = default)
-        where T : unmanaged, IEquatable<T>
+        where T : IEquatable<T>
         where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
         where TKernel : struct, IKernel => Cluster<T, TShape, TKernel>(points.AsSpan(), kernel, shape);
 
@@ -84,7 +84,7 @@ public static partial class MeanShift
         List<T> field,
         TKernel kernel,
         TShape shape = default)
-        where T : unmanaged, IEquatable<T>
+        where T : IEquatable<T>
         where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
         where TKernel : struct, IKernel => Cluster<T, TShape, TKernel>(points.AsSpan(), field.AsSpan(), kernel, shape);
 
@@ -93,7 +93,7 @@ public static partial class MeanShift
         List<T> points,
         TKernel kernel,
         TShape shape = default)
-        where T : unmanaged, IEquatable<T>
+        where T : IEquatable<T>
         where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
         where TKernel : struct, IKernel => Cluster<T, TShape, TKernel>(points.AsSpan(), kernel, shape);
 

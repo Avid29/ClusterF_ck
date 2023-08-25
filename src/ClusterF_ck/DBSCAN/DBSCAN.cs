@@ -20,41 +20,37 @@ public static class DBSCAN
     /// <param name="config">A configuration for DBSCAN including epsilon and minPoints.</param>
     /// <param name="shape">The shape to use on the points to cluster.</param>
     /// <returns>A list of clusters.</returns>
-    public static unsafe List<DBSCluster<T, TShape>> Cluster<T, TShape>(
+    public static List<DBSCluster<T, TShape>> Cluster<T, TShape>(
         ReadOnlySpan<T> points,
-        DBSConfig<T, TShape> config,
+        DBSConfig config,
         TShape shape = default)
-        where T : unmanaged
         where TShape : struct, IDistanceSpace<T>
     {
         List<DBSCluster<T, TShape>> clusters = new();
+        
+        // Create a DBSContext to avoid passing too many values between functions
+        DBSContext<T, TShape> context = new(config, shape, points);
 
-        fixed (T* p = points)
+        for (int i = 0; i < points.Length; i++)
         {
-            // Create a DBSContext to avoid passing too many values between functions
-            DBSContext<T, TShape> context = new(config, shape, p, points.Length);
+            // Skip point if already classified
+            if (context.ClusterIds[i] != DBSConstants.UNCLASSIFIED_ID)
+                continue;
 
-            for (int i = 0; i < points.Length; i++)
+            // Attempt to create a new cluster, and add it the list if successful
+            T point = points[i];
+            var cluster = CreateCluster(point, i, context);
+            if (cluster != null)
             {
-                // Skip point if already classified
-                if (context.ClusterIds[i] != DBSConstants.UNCLASSIFIED_ID)
-                    continue;
-
-                // Attempt to create a new cluster, and add it the list if successful
-                T point = p[i];
-                var cluster = CreateCluster(point, i, context);
-                if (cluster != null)
-                {
-                    clusters.Add(cluster);
-                }
+                clusters.Add(cluster);
             }
+        }
 
-            // Add noise (if applicable)
-            // Noise cluster is not null in this condition.
-            if (context.ReturnNoise)
-            {
-                clusters.Add(context.NoiseCluster!);
-            }
+        // Add noise (if applicable)
+        // Noise cluster is not null in this condition.
+        if (context.ReturnNoise)
+        {
+            clusters.Add(context.NoiseCluster!);
         }
 
         return clusters;
@@ -64,7 +60,6 @@ public static class DBSCAN
         T p,
         int i,
         DBSContext<T, TShape> context)
-        where T : unmanaged
         where TShape : struct, IDistanceSpace<T>
     {
         // Create an empty cluster with the next cluster Id.
@@ -105,7 +100,6 @@ public static class DBSCAN
         DBSCluster<T, TShape> cluster,
         List<(T, int)> seeds,
         DBSContext<T, TShape> context)
-        where T : unmanaged
         where TShape : struct, IDistanceSpace<T>
     {
         // Seeds is used as a queue for breadth-first graph traversal
@@ -140,11 +134,10 @@ public static class DBSCAN
     private static unsafe List<(T, int)> GetSeeds<T, TShape>(
         T p,
         DBSContext<T, TShape> context)
-        where T : unmanaged
         where TShape : struct, IDistanceSpace<T>
     {
         List<(T, int)> seeds = new();
-        for (int i = 0; i < context.PointsLength; i++)
+        for (int i = 0; i < context.Points.Length; i++)
         {
             if (context.Shape.FindDistanceSquared(p, context.Points[i]) <= context.Episilon2)
             {

@@ -13,7 +13,6 @@ namespace ClusterF_ck.DBSCAN;
 /// <typeparam name="T">The type of data in the cluster.</typeparam>
 /// <typeparam name="TShape">A shape to describe to provide comparison methods for <typeparamref name="T"/>.</typeparam>
 public class DBSCluster<T, TShape> : Cluster<T, TShape>, IWeightedCluster
-    where T : unmanaged
     where TShape : struct, IDistanceSpace<T>
 {
     /// <summary>

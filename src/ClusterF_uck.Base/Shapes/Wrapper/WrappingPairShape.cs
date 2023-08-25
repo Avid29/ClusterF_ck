@@ -11,8 +11,6 @@ namespace ClusterF_ck.Shapes.Wrapper;
 /// <typeparam name="T2">The type of the pair.</typeparam>
 /// <typeparam name="TShape">The type of the child shape for <typeparamref name="T"/>.</typeparam>
 internal struct WrappingPairShape<T, T2, TShape> : IDistanceSpace<(T, T2)>
-    where T : unmanaged
-    where T2 : unmanaged
     where TShape : struct, IDistanceSpace<T>
 {
     // Don't make readonly.

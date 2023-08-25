@@ -3,6 +3,7 @@
 using ClusterF_ck.IO;
 using ClusterF_ck.IO.Interfaces;
 using ClusterF_ck.Spaces.Properties;
+using CommunityToolkit.Diagnostics;
 using System.Collections.Generic;
 
 namespace ClusterF_ck.KMeans;
@@ -13,21 +14,22 @@ namespace ClusterF_ck.KMeans;
 /// <typeparam name="T">The type of data in the cluster.</typeparam>
 /// <typeparam name="TShape">A shape to describe to provide comparison methods for <typeparamref name="T"/>.</typeparam>
 public class KMeansCluster<T, TShape> : Cluster<T, TShape>, ICentroidCluster<T>, IPointsCluster<T>, IWeightedCluster
-    where T : unmanaged
     where TShape : struct, IDistanceSpace<T>, IAverageSpace<T>
 {
     private T? _centroid;
+    private bool _invalid;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="KMeansCluster{T, TShape}"/> class.
     /// </summary>
     internal KMeansCluster()
     {
+        _centroid = default;
     }
 
     // Cached with deferred calculation
     /// <inheritdoc/>
-    public T Centroid => _centroid ?? (T)(_centroid = CalculateCentroid());
+    public T? Centroid => _invalid ? _centroid = CalculateCentroid() : _centroid;
 
     /// <inheritdoc/>
     IReadOnlyCollection<T> IPointsCluster<T>.Points => Points;
@@ -60,7 +62,7 @@ public class KMeansCluster<T, TShape> : Cluster<T, TShape>, ICentroidCluster<T>,
         Points.Add(item);
 
         // Reset centroid, but defer calculation
-        _centroid = null;
+        _invalid = true;
     }
 
     /// <summary>
@@ -72,7 +74,7 @@ public class KMeansCluster<T, TShape> : Cluster<T, TShape>, ICentroidCluster<T>,
     {
         T removed = Points[index];
         Points.RemoveAt(index);
-        _centroid = null;
+        _invalid = true;
         return removed;
     }
 
@@ -91,6 +93,10 @@ public class KMeansCluster<T, TShape> : Cluster<T, TShape>, ICentroidCluster<T>,
         for (int i = 0; i < Points.Count; i++)
         {
             T p = Points[i];
+
+            // This should never happen because the cluster should never be empty.
+            Guard.IsNotNull(Centroid);
+
             double distance = shape.FindDistanceSquared(p, Centroid);
 
             // Update tracking variables

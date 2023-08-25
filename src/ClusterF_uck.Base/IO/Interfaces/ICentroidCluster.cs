@@ -7,10 +7,9 @@ namespace ClusterF_ck.IO.Interfaces;
 /// </summary>
 /// <typeparam name="T">The type of data in the cluster.</typeparam>
 public interface ICentroidCluster<out T>
-    where T : unmanaged
 {
     /// <summary>
     /// Gets the center point of all points in the <see cref="ICentroidCluster{T}"/>.
     /// </summary>
-    T Centroid { get; }
+    T? Centroid { get; }
 }

@@ -24,7 +24,6 @@ public static class KMeans
         ReadOnlySpan<T> points,
         int k,
         TShape shape)
-        where T : unmanaged
         where TShape : struct, IDistanceSpace<T>, IAverageSpace<T>
     {
         // Split to arbitrary clusters
@@ -77,7 +76,6 @@ public static class KMeans
         T point,
         KMeansCluster<T, TShape>[] clusters,
         TShape shape)
-        where T : unmanaged
         where TShape : struct, IDistanceSpace<T>, IAverageSpace<T>
     {
         // Track nearest seen value and its index.
@@ -86,7 +84,12 @@ public static class KMeans
 
         for (int k = 0; k < clusters.Length; k++)
         {
-            double distance = shape.FindDistanceSquared(point, clusters[k].Centroid);
+            T? centroid = clusters[k].Centroid;
+
+            // This should never happen because the cluster should never be empty.
+            Guard.IsNotNull(centroid);
+
+            double distance = shape.FindDistanceSquared(point, centroid);
 
             // Don't update tracking if further
             if (minimumDistance < distance)
@@ -111,7 +114,6 @@ public static class KMeans
     private static KMeansCluster<T, TShape>[] Split<T, TShape>(
         ReadOnlySpan<T> points,
         int clusterCount)
-        where T : unmanaged
         where TShape : struct, IDistanceSpace<T>, IAverageSpace<T>
     {
         Guard.IsGreaterThanOrEqualTo(clusterCount, 2);

@@ -13,7 +13,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\ClusterF_ck.Evaluation\ClusterF_ck.Evaluation.csproj" />
 	  <ProjectReference Include="..\ClusterF_uck.Base\ClusterF_ck.Base.csproj" />
 	</ItemGroup>
 

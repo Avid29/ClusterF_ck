@@ -119,7 +119,8 @@ public static class DBSCAN
                     if (iPId is DBSConstants.UNCLASSIFIED_ID or DBSConstants.NOISE_ID)
                     {
                         // If unclassified, add to search queue
-                        if (iPId == DBSConstants.UNCLASSIFIED_ID) seeds.Add(iP);
+                        if (iPId == DBSConstants.UNCLASSIFIED_ID)
+                            seeds.Add(iP);
 
                         cluster.Points.Add(iP.Item1);
                         iPId = cluster.ClusterId;
@@ -131,7 +132,7 @@ public static class DBSCAN
         }
     }
 
-    private static unsafe List<(T, int)> GetSeeds<T, TShape>(
+    private static List<(T, int)> GetSeeds<T, TShape>(
         T p,
         DBSContext<T, TShape> context)
         where TShape : struct, IDistanceSpace<T>

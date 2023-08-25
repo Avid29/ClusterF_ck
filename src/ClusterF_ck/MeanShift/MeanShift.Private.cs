@@ -74,7 +74,7 @@ public static partial class MeanShift
     /// </remarks>
     /// <returns>An array of clusters weighted by the contributing points.</returns>
     /// <inheritdoc cref="Cluster{T, TShape, TKernel}(ReadOnlySpan{T}, ReadOnlySpan{T}, TKernel, TShape)"/>
-    internal static unsafe (T, int)[] ClusterRaw<T, TShape, TKernel>(
+    internal static (T, int)[] ClusterRaw<T, TShape, TKernel>(
         ReadOnlySpan<T> points,
         ReadOnlySpan<T> field,
         TKernel kernel,

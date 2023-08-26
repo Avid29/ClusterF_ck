@@ -3,6 +3,7 @@
   <PropertyGroup>
 	  <LangVersion>10.0</LangVersion>
 	  <Nullable>enable</Nullable>
-	  <GenerateDocumentationFile>False</GenerateDocumentationFile>
+	  <GenerateDocumentationFile>false</GenerateDocumentationFile>
+	  <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 </Project>

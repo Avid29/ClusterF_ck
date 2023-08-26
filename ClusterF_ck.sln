@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{926C1D
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClusterF_ck.Evaluation.Tests", "test\ClusterF_ck.Evaluation.Tests\ClusterF_ck.Evaluation.Tests.csproj", "{274FC43B-A3E8-49F4-829C-0E58BE098BF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{AB4E8D82-B5C3-4E42-B3E5-687002680BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB4E8D82-B5C3-4E42-B3E5-687002680BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB4E8D82-B5C3-4E42-B3E5-687002680BF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{274FC43B-A3E8-49F4-829C-0E58BE098BF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{274FC43B-A3E8-49F4-829C-0E58BE098BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{274FC43B-A3E8-49F4-829C-0E58BE098BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{274FC43B-A3E8-49F4-829C-0E58BE098BF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{FC861702-AE72-43FA-B38E-4F27A55B68DF} = {A2CE842B-1E28-4D59-9336-FFB40D3BBAE4}
 		{CAC41AE2-6724-4AEA-9E81-0D7820A3BFB8} = {A2CE842B-1E28-4D59-9336-FFB40D3BBAE4}
+		{274FC43B-A3E8-49F4-829C-0E58BE098BF7} = {A2CE842B-1E28-4D59-9336-FFB40D3BBAE4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {89B6A8B5-6B35-41AA-A0D1-8CBF0B3C86EC}

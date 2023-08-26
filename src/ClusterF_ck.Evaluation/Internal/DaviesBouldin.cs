@@ -1,39 +1,77 @@
 ﻿// Adam Dernis © 2023
 
 using ClusterF_ck.IO.Interfaces;
-using System;
-using System.Linq;
-using System.Collections.Generic;
 using ClusterF_ck.Spaces.Properties;
+using CommunityToolkit.Diagnostics;
+using CommunityToolkit.HighPerformance;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClusterF_ck.Evaluation.Internal;
 
+/// <summary>
+/// A static class containing methods for evaluating the Davies-Bouldin Index of a set of clusters.
+/// </summary>
 public static class DaviesBouldin
 {
+    /// <summary>
+    /// Evaluates the Davies-Bouldin Index of a set of clusters.
+    /// </summary>
+    /// <typeparam name="T">The type of point in the cluster.</typeparam>
+    /// <typeparam name="TCluster">The type of the cluster.</typeparam>
+    /// <typeparam name="TShape">The shape used to analyze the cluster.</typeparam>
+    /// <param name="clusters">The set of clusters to evaluate.</param>
+    /// <param name="shape">The shape to use to compare the points in the cluster.</param>
+    /// <returns>The Davies-Bouldin Index of the cluster set.</returns>
     public static double Evaluate<T, TCluster, TShape>(List<TCluster> clusters, TShape shape = default)
-        where T : unmanaged
         where TCluster : ICentroidCluster<T>, IPointsCluster<T>
         where TShape : struct, IDistanceSpace<T>
     {
-        // Track the intracluster distance of each cluster
-        // The intracluster distance is the average distance of a point from the centroid.
-        var clusterIntraDistances = new double[clusters.Count];
+        // N is a shorthand for the cluster count.
+        int n = clusters.Count;
+
+        // Calculate the intracluster distance of each cluster
+        double[] clusterIntraDistances = clusters.Select(x => Intermediates.IntraDistance<T, TCluster, TShape>(x, shape)).ToArray();
         
-        // Calculate intracluster distance of each cluster
-        int i = 0;
-        foreach (var cluster in clusters)
+        // Calculate the similarities of each cluster
+        double[,] similarities = new double[n, n];
+        for (int i = 0; i < n - 1; i++)
         {
-            clusterIntraDistances[i] = cluster.Points.Average(x => Math.Sqrt(shape.FindDistanceSquared(cluster.Centroid, x)));
-            i++;
+            // Get the centroid and intra-distance of cluster i
+            T? iCentroid = clusters[i].Centroid;
+            double iIntraDist = clusterIntraDistances[i];
+            Guard.IsNotNull(iCentroid);
+
+            for (int j = i + 1; j < n; j++)
+            {
+                // Get the centroid and intra-distance of cluster j
+                T? jCentroid = clusters[j].Centroid;
+                double jIntraDistance = clusterIntraDistances[j];
+                Guard.IsNotNull(jCentroid);
+
+                // Calculate the distance between cluster i and cluster j
+                double ijDistance = Math.Sqrt(shape.FindDistanceSquared(iCentroid, jCentroid));
+
+                // Store similarity to the similarities table
+                // This is a bidirectional relationship, so we can calculate it once and store it for [i,j] and [j,i]
+                similarities[i, j] = similarities[j, i]
+                    = (iIntraDist + jIntraDistance) / ijDistance;
+            }
         }
 
+        // Find the most greatest similarity for each cluster
+        double[] greatestSimilarity = new double[n];
+        for (int i = 0; i < n; i++)
+        {
+            // Find the greatest in the row
+            double max = double.NegativeInfinity;
+            foreach (double x in similarities.GetRow(i))
+                max = Math.Max(max, x);
 
-        i = 0;
-        //foreach ()
-        //{
+            greatestSimilarity[i] = max;
+        }
 
-        //}
-
-        return 0;
+        return greatestSimilarity.Average();
     }
 }

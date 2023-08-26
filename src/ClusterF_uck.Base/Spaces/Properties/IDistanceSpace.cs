@@ -8,10 +8,10 @@ namespace ClusterF_ck.Spaces.Properties;
 public interface IDistanceSpace<T> : ISpace<T>
 {
     /// <summary>
-    /// Gets the distance between <paramref name="it1"/> and <paramref name="it2"/>.
+    /// Gets the distance squared between <paramref name="it1"/> and <paramref name="it2"/>.
     /// </summary>
     /// <param name="it1">Point A.</param>
     /// <param name="it2">Point B.</param>
-    /// <returns>The distance between point A and point B.</returns>
+    /// <returns>The distance squared between point A and point B.</returns>
     double FindDistanceSquared(T it1, T it2);
 }

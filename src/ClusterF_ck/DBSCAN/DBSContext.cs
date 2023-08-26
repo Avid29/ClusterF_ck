@@ -1,6 +1,7 @@
 ﻿// Adam Dernis © 2022
 
 using ClusterF_ck.Spaces.Properties;
+using System;
 
 namespace ClusterF_ck.DBSCAN;
 
@@ -9,8 +10,7 @@ namespace ClusterF_ck.DBSCAN;
 /// </summary>
 /// <typeparam name="T">The type of points to cluster.</typeparam>
 /// <typeparam name="TShape">The type of shape to use on the points to cluster.</typeparam>
-internal unsafe ref struct DBSContext<T, TShape>
-    where T : unmanaged
+internal ref struct DBSContext<T, TShape>
     where TShape : struct, IDistanceSpace<T>
 {
     /// <summary>
@@ -19,11 +19,10 @@ internal unsafe ref struct DBSContext<T, TShape>
     /// <param name="config">The configuration DBSCAN is running with.</param>
     /// <param name="shape">The shape to use on the points to cluster.</param>
     /// <param name="points">The points being clustered.</param>
-    /// <param name="pointsLength">The points number of points in <paramref name="points"/>.</param>
-    public DBSContext(DBSConfig<T, TShape> config, TShape shape, T* points, int pointsLength)
+    public DBSContext(DBSConfig config, TShape shape, ReadOnlySpan<T> points)
     {
         NextClusterId = 1;
-        ClusterIds = new int[pointsLength];
+        ClusterIds = new int[points.Length];
 
         Episilon2 = config.Epsilon * config.Epsilon;
         MinPoints = config.MinPoints;
@@ -31,7 +30,6 @@ internal unsafe ref struct DBSContext<T, TShape>
         NoiseCluster = config.ReturnNoise ? new DBSCluster<T, TShape>(DBSConstants.NOISE_ID) : null;
 
         Points = points;
-        PointsLength = pointsLength;
 
         Shape = shape;
     }
@@ -65,19 +63,14 @@ internal unsafe ref struct DBSContext<T, TShape>
     public DBSCluster<T, TShape>? NoiseCluster { get; }
 
     /// <summary>
-    /// Gets a value indicating wether or not to return the noise cluster with the results.
+    /// Gets a value indicating whether or not to return the noise cluster with the results.
     /// </summary>
     public bool ReturnNoise => NoiseCluster != null;
 
     /// <summary>
     /// Gets a pointer to a span containing all the points being clustered.
     /// </summary>
-    public T* Points { get; }
-
-    /// <summary>
-    /// Gets the number of items in the <see cref="Points"/>.
-    /// </summary>
-    public int PointsLength { get; }
+    public ReadOnlySpan<T> Points { get; }
 
     /// <summary>
     /// Gets or sets the shape to use on the points to cluster. 

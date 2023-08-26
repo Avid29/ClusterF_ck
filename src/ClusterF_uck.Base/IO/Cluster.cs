@@ -8,7 +8,6 @@ namespace ClusterF_ck.IO
     /// The base class for clusters.
     /// </summary>
     public abstract class Cluster<T, TShape>
-        where T : unmanaged
         where TShape : struct, ISpace<T>
     {
     }

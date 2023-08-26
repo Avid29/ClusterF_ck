@@ -9,7 +9,6 @@ namespace ClusterF_ck.IO.Interfaces;
 /// </summary>
 /// <typeparam name="T">The type of data in the cluster.</typeparam>
 public interface IPointsCluster<out T>
-    where T : unmanaged
 {
     /// <summary>
     /// Gets an <see cref="IReadOnlyCollection{T}"/> of points in the cluster.

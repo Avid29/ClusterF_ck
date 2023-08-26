@@ -9,12 +9,12 @@ namespace ClusterF_ck.Tests.DBSCAN.Abstract
 {
     public abstract class DBSTestsBase
     {
-        protected void Run<T, TShape>(DataSet<T> data, DBSConfig<T, TShape> config, TShape shape = default)
+        protected void Run<T, TShape>(DataSet<T> data, DBSConfig config, TShape shape = default)
             where T : unmanaged
             where TShape : struct, IDistanceSpace<T>
         {
             // TODO: Verify results
-            DBS.Cluster(data.Data, config, shape);
+            DBS.Cluster<T, TShape>(data.Data, config, shape);
         }
     }
 }

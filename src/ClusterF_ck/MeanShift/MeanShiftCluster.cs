@@ -12,7 +12,6 @@ namespace ClusterF_ck.MeanShift;
 /// <typeparam name="T">The type of points in the cluster.</typeparam>
 /// <typeparam name="TShape">A shape to describe to provide comparison methods for <typeparamref name="T"/>.</typeparam>
 public class MeanShiftCluster<T, TShape> : Cluster<T, TShape>, ICentroidCluster<T>, IWeightedCluster
-    where T : unmanaged
     where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
 {
     /// <summary>

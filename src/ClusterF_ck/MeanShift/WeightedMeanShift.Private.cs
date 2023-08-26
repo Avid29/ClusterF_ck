@@ -186,9 +186,9 @@ public static partial class WeightedMeanShift
         // Connected components merge using DBSCAN with a minPoints of 0.
         // Because convergence may be imperfect, a minimum difference can be used to merge similar clusters.
         // A wrapping shape must be used in order to cluster the weighted points.
-        DBSConfig<(T, double), WrappingPairShape<T, double, TShape>> config = new(kernel.WindowSize, 0);
+        DBSConfig config = new(kernel.WindowSize, 0);
         WrappingPairShape<T, double, TShape> weightedShape = new(shape);
-        var results = DBS.Cluster(mergedCentroids, config, weightedShape);
+        var results = DBS.Cluster<(T, double), WrappingPairShape<T, double, TShape>>(mergedCentroids, config, weightedShape);
 
         // No components to merge
         if (mergedCentroids.Length == results.Count)

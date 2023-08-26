@@ -1,8 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+	
+  <!--Build Properties-->
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
 	<RootNamespace>ClusterF_ck</RootNamespace>
+  </PropertyGroup>
+
+  <!--Nuget Metadata-->
+  <PropertyGroup>
+	  <PackageId>ClusterF_ck.Base</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

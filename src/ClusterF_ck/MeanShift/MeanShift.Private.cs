@@ -74,12 +74,12 @@ public static partial class MeanShift
     /// </remarks>
     /// <returns>An array of clusters weighted by the contributing points.</returns>
     /// <inheritdoc cref="Cluster{T, TShape, TKernel}(ReadOnlySpan{T}, ReadOnlySpan{T}, TKernel, TShape)"/>
-    internal static unsafe (T, int)[] ClusterRaw<T, TShape, TKernel>(
+    internal static (T, int)[] ClusterRaw<T, TShape, TKernel>(
         ReadOnlySpan<T> points,
         ReadOnlySpan<T> field,
         TKernel kernel,
         TShape shape = default)
-        where T : unmanaged, IEquatable<T>
+        where T : IEquatable<T>
         where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
         where TKernel : struct, IKernel
     {
@@ -89,19 +89,16 @@ public static partial class MeanShift
         // This array will be reused on every iteration
         // However we allocate it here once to save on allocation time and space
         (T, double)[] fieldWeights = new (T, double)[field.Length];
-
-        fixed (T* f = field)
-        {
+        
             // Shift each cluster to its convergence point.
             for (int i = 0; i < clusters.Length; i++)
             {
                 T point = points[i];
-                T cluster = MeanShiftPoint(point, f, points.Length, shape, kernel, fieldWeights);
+                T cluster = MeanShiftPoint(point, field, shape, kernel, fieldWeights);
                 clusters[i] = cluster;
 
                 // TODO: Track points in the cluster
             }
-        }
 
         return PostProcess<T, TShape, TKernel>(clusters.AsSpan(), kernel, shape);
     }
@@ -110,7 +107,7 @@ public static partial class MeanShift
     /// Takes an array of points and tuples and converts them to <see cref="MeanShiftCluster{T,TShape}"/>s.
     /// </summary>
     private static List<MeanShiftCluster<T, TShape>> Wrap<T, TShape>((T, int)[] raw)
-        where T : unmanaged, IEquatable<T>
+        where T : IEquatable<T>
         where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
     {
         List<MeanShiftCluster<T, TShape>> clusters = new();
@@ -122,14 +119,12 @@ public static partial class MeanShift
         return clusters;
     }
 
-    private static unsafe T MeanShiftPoint<T, TShape, TKernel>(
+    private static T MeanShiftPoint<T, TShape, TKernel>(
         T cluster,
-        T* field,
-        int fieldSize,
+        ReadOnlySpan<T> field,
         TShape shape,
         TKernel kernel,
         (T, double)[] fieldWeights)
-        where T : unmanaged
         where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
         where TKernel : struct, IKernel
     {
@@ -141,7 +136,7 @@ public static partial class MeanShift
         while (changed)
         {
             // Determine weight of all field points from the cluster's current position.
-            for (int i = 0; i < fieldSize; i++)
+            for (int i = 0; i < field.Length; i++)
             {
                 T point = field[i];
                 double distanceSquared = shape.FindDistanceSquared(cluster, point);
@@ -161,7 +156,7 @@ public static partial class MeanShift
         ReadOnlySpan<T> clusters,
         TKernel kernel,
         TShape shape)
-        where T : unmanaged, IEquatable<T>
+        where T : IEquatable<T>
         where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
         where TKernel : struct, IKernel
     {
@@ -184,9 +179,9 @@ public static partial class MeanShift
         // Connected components merge using DBSCAN with a minPoints of 0.
         // Because convergence may be imperfect, a minimum difference can be used to merge similar clusters.
         // A wrapping shape must be used in order to cluster the weighted points.
-        DBSConfig<(T, int), WrappingPairShape<T, int, TShape>> config = new(kernel.WindowSize, 0);
+        DBSConfig config = new(kernel.WindowSize, 0);
         WrappingPairShape<T, int, TShape> wrappingShape = new(shape);
-        var results = DBS.Cluster(mergedCentroids, config, wrappingShape);
+        var results = DBS.Cluster<(T, int), WrappingPairShape<T, int, TShape>>(mergedCentroids, config, wrappingShape);
 
         // No components to merge
         if (mergedCentroids.Length == results.Count)

@@ -1,8 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+	<!--Build Properties-->
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
 		<RootNamespace>ClusterF_ck</RootNamespace>
+	</PropertyGroup>
+
+	<!--Nuget Metadata-->
+	<PropertyGroup>
+		<PackageId>ClusterF_ck</PackageId>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -13,7 +19,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\ClusterF_ck.Evaluation\ClusterF_ck.Evaluation.csproj" />
 	  <ProjectReference Include="..\ClusterF_uck.Base\ClusterF_ck.Base.csproj" />
 	</ItemGroup>
 

@@ -20,13 +20,13 @@ public static class DBSCAN
     /// <param name="config">A configuration for DBSCAN including epsilon and minPoints.</param>
     /// <param name="shape">The shape to use on the points to cluster.</param>
     /// <returns>A list of clusters.</returns>
-    public static List<DBSCluster<T, TShape>> Cluster<T, TShape>(
+    public static List<DBSCluster<T>> Cluster<T, TShape>(
         ReadOnlySpan<T> points,
         DBSConfig config,
         TShape shape = default)
         where TShape : struct, IDistanceSpace<T>
     {
-        List<DBSCluster<T, TShape>> clusters = new();
+        List<DBSCluster<T>> clusters = new();
         
         // Create a DBSContext to avoid passing too many values between functions
         DBSContext<T, TShape> context = new(config, shape, points);
@@ -56,7 +56,7 @@ public static class DBSCAN
         return clusters;
     }
 
-    private static DBSCluster<T, TShape>? CreateCluster<T, TShape>(
+    private static DBSCluster<T>? CreateCluster<T, TShape>(
         T p,
         int i,
         DBSContext<T, TShape> context)
@@ -64,7 +64,7 @@ public static class DBSCAN
     {
         // Create an empty cluster with the next cluster Id.
         // Get the connected points to the cluster, then populate the cluster
-        DBSCluster<T, TShape> cluster = new(context.NextClusterId);
+        DBSCluster<T> cluster = new(context.NextClusterId);
         List<(T, int)> seeds = GetSeeds(p, context);
         if (seeds.Count < context.MinPoints)
         {
@@ -97,7 +97,7 @@ public static class DBSCAN
     }
 
     private static void ExpandCluster<T, TShape>(
-        DBSCluster<T, TShape> cluster,
+        DBSCluster<T> cluster,
         List<(T, int)> seeds,
         DBSContext<T, TShape> context)
         where TShape : struct, IDistanceSpace<T>
@@ -140,7 +140,7 @@ public static class DBSCAN
         List<(T, int)> seeds = new();
         for (int i = 0; i < context.Points.Length; i++)
         {
-            if (context.Shape.FindDistanceSquared(p, context.Points[i]) <= context.Episilon2)
+            if (context.Shape.FindDistanceSquared(p, context.Points[i]) <= context.Epsilon2)
             {
                 seeds.Add((context.Points[i], i));
             }

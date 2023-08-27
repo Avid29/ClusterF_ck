@@ -20,7 +20,7 @@ namespace ClusterF_ck.Shapes
             => Math.Abs(it1 - it2) < TOLERANCE;
 
         /// <inheritdoc/>
-        public double Average(double[] items)
+        public readonly double Average(double[] items)
         {
             double sum = 0;
             int count = 0;
@@ -33,15 +33,15 @@ namespace ClusterF_ck.Shapes
         }
 
         /// <inheritdoc/>
-        public double FindDistanceSquared(double it1, double it2)
+        public readonly double FindDistanceSquared(double it1, double it2)
             => Math.Abs(it1 - it2);
 
         /// <inheritdoc/>
-        public int GetCell(double value)
+        public readonly int GetCell(double value)
              => (int)(value / Window);
 
         /// <inheritdoc/>
-        public double GetCellOrigin(int cell)
+        public readonly double GetCellOrigin(int cell)
             => (cell * Window);
 
         /// <inheritdoc/>

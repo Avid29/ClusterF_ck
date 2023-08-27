@@ -8,15 +8,13 @@ using System.Collections.Generic;
 namespace ClusterF_ck.DBSCAN;
 
 /// <summary>
-/// A <see cref="Cluster{T,TShape}"/> implementation for the DBSCAN algorithm.
+/// A <see cref="Cluster{T}"/> implementation for the DBSCAN algorithm.
 /// </summary>
 /// <typeparam name="T">The type of data in the cluster.</typeparam>
-/// <typeparam name="TShape">A shape to describe to provide comparison methods for <typeparamref name="T"/>.</typeparam>
-public class DBSCluster<T, TShape> : Cluster<T, TShape>, IWeightedCluster
-    where TShape : struct, IDistanceSpace<T>
+public class DBSCluster<T> : Cluster<T>, IWeightedCluster
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="DBSCluster{T, TShape}"/> class.
+    /// Initializes a new instance of the <see cref="DBSCluster{T}"/> class.
     /// </summary>
     /// <param name="id">The cluster's ID within the DBSCAN.</param>
     internal DBSCluster(int id)

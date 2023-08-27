@@ -35,7 +35,7 @@ jobs:
 
   pack-and-publish:
     if: ${{github.event_name == 'push'}}
-    needs: build
+    needs: build-and-test
     runs-on: ubuntu-latest
     steps:
       # Checkout the repo

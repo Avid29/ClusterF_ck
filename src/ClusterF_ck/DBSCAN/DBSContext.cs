@@ -27,7 +27,7 @@ internal ref struct DBSContext<T, TShape>
         Episilon2 = config.Epsilon * config.Epsilon;
         MinPoints = config.MinPoints;
 
-        NoiseCluster = config.ReturnNoise ? new DBSCluster<T, TShape>(DBSConstants.NOISE_ID) : null;
+        NoiseCluster = config.ReturnNoise ? new DBSCluster<T>(DBSConstants.NOISE_ID) : null;
 
         Points = points;
 
@@ -60,7 +60,7 @@ internal ref struct DBSContext<T, TShape>
     /// <remarks>
     /// Null if not tracking noise.
     /// </remarks>
-    public DBSCluster<T, TShape>? NoiseCluster { get; }
+    public DBSCluster<T>? NoiseCluster { get; }
 
     /// <summary>
     /// Gets a value indicating whether or not to return the noise cluster with the results.

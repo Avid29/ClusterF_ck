@@ -8,12 +8,12 @@ using System.Collections.Generic;
 namespace ClusterF_ck.Intermediate.Boxing;
 
 /// <summary>
-/// A <see cref="Cluster{T, TShape}"/> implementation for Boxing cluster.
+/// A <see cref="Cluster{T}"/> implementation for Boxing cluster.
 /// </summary>
 /// <typeparam name="T">The type of data in the cluster.</typeparam>
 /// <typeparam name="TCell">The type of cell identifier</typeparam>
 /// <typeparam name="TShape">A shape to describe to provide comparison methods for <typeparamref name="T"/>.</typeparam>
-public class BoxingCluster<T, TCell, TShape> : Cluster<T, TShape>, ICentroidCluster<T>, IPointsCluster<T>, IWeightedCluster
+public class BoxingCluster<T, TCell, TShape> : Cluster<T>, ICentroidCluster<T>, IPointsCluster<T>, IWeightedCluster
     where T : unmanaged
     where TCell : unmanaged
     where TShape : struct, IGridSpace<T, TCell>, IAverageSpace<T>

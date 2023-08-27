@@ -7,11 +7,11 @@ using ClusterF_ck.Spaces.Properties;
 namespace ClusterF_ck.MeanShift;
 
 /// <summary>
-/// A <see cref="Cluster{T, TShape}"/> implementation for the MeanShift algorithm.
+/// A <see cref="Cluster{T}"/> implementation for the MeanShift algorithm.
 /// </summary>
 /// <typeparam name="T">The type of points in the cluster.</typeparam>
 /// <typeparam name="TShape">A shape to describe to provide comparison methods for <typeparamref name="T"/>.</typeparam>
-public class MeanShiftCluster<T, TShape> : Cluster<T, TShape>, ICentroidCluster<T>, IWeightedCluster
+public class MeanShiftCluster<T, TShape> : Cluster<T>, ICentroidCluster<T>, IWeightedCluster
     where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
 {
     /// <summary>

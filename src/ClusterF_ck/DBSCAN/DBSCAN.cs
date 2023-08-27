@@ -140,7 +140,7 @@ public static class DBSCAN
         List<(T, int)> seeds = new();
         for (int i = 0; i < context.Points.Length; i++)
         {
-            if (context.Shape.FindDistanceSquared(p, context.Points[i]) <= context.Episilon2)
+            if (context.Shape.FindDistanceSquared(p, context.Points[i]) <= context.Epsilon2)
             {
                 seeds.Add((context.Points[i], i));
             }

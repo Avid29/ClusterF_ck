@@ -24,7 +24,7 @@ internal ref struct DBSContext<T, TShape>
         NextClusterId = 1;
         ClusterIds = new int[points.Length];
 
-        Episilon2 = config.Epsilon * config.Epsilon;
+        Epsilon2 = config.Epsilon * config.Epsilon;
         MinPoints = config.MinPoints;
 
         NoiseCluster = config.ReturnNoise ? new DBSCluster<T>(DBSConstants.NOISE_ID) : null;
@@ -47,7 +47,7 @@ internal ref struct DBSContext<T, TShape>
     /// <summary>
     /// Gets epsilon squared. The max distance squared to consider two points connected.
     /// </summary>
-    public double Episilon2 { get; }
+    public double Epsilon2 { get; }
 
     /// <summary>
     /// Gets the minimum number of connected points required to make a cluster.
@@ -65,7 +65,7 @@ internal ref struct DBSContext<T, TShape>
     /// <summary>
     /// Gets a value indicating whether or not to return the noise cluster with the results.
     /// </summary>
-    public bool ReturnNoise => NoiseCluster != null;
+    public readonly bool ReturnNoise => NoiseCluster != null;
 
     /// <summary>
     /// Gets a pointer to a span containing all the points being clustered.

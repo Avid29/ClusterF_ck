@@ -2,7 +2,6 @@
 
 using ClusterF_ck.IO;
 using ClusterF_ck.IO.Interfaces;
-using ClusterF_ck.Spaces.Properties;
 
 namespace ClusterF_ck.MeanShift;
 
@@ -11,13 +10,12 @@ namespace ClusterF_ck.MeanShift;
 /// </summary>
 /// <typeparam name="T">The type of points in the cluster.</typeparam>
 /// <typeparam name="TShape">A shape to describe to provide comparison methods for <typeparamref name="T"/>.</typeparam>
-public class MeanShiftCluster<T, TShape> : Cluster<T>, ICentroidCluster<T>, IWeightedCluster
-    where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
+public class MeanShiftCluster<T> : Cluster<T>, ICentroidCluster<T>, IWeightedCluster
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="MeanShiftCluster{T,TShape}"/> class.
+    /// Initializes a new instance of the <see cref="MeanShiftCluster{T}"/> class.
     /// </summary>
-    /// <param name="centroid">The centroid of the <see cref="MeanShiftCluster{T,TShape}"/>.</param>
+    /// <param name="centroid">The centroid of the <see cref="MeanShiftCluster{T}"/>.</param>
     /// <param name="weight">The total weight of, or summed point count for the cluster.</param>
     internal MeanShiftCluster(T centroid, double weight)
     {

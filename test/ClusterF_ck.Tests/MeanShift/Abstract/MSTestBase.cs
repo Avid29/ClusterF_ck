@@ -11,10 +11,10 @@ namespace ClusterF_ck.Tests.MeanShift.Abstract
 {
     public abstract class MSTestBase
     {
-        protected List<MeanShiftCluster<T, TShape>> Run<T, TShape, TKernel>(DataSet<T> data, TKernel kernel, TShape shape = default)
+        protected List<MeanShiftCluster<T>> Run<T, TShape, TKernel>(DataSet<T> data, TKernel kernel, TShape shape = default)
             where T : unmanaged, IEquatable<T>
             where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
-            where TKernel : struct, IKernel => MS.Cluster<T, TShape, TKernel>(data.Data, kernel, shape);
+            where TKernel : struct, IKernel => MS.Cluster(data.Data, kernel, shape);
 
         protected void WeightedComparedRun<T, TShape, TKernel>(DataSet<T> data, TKernel kernel, TShape shape = default)
             where T : unmanaged, IEquatable<T>
@@ -22,7 +22,7 @@ namespace ClusterF_ck.Tests.MeanShift.Abstract
             where TKernel : struct, IKernel
         {
             var uwResult = Run(data, kernel, shape);
-            var wResult = WMS.Cluster<T, TShape, TKernel>(data.Data, kernel, shape);
+            var wResult = WMS.Cluster(data.Data, kernel, shape);
 
             // TODO: Compare results
         }

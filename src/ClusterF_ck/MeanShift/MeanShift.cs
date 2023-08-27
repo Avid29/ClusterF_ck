@@ -27,7 +27,7 @@ public static partial class MeanShift
     /// <param name="kernel">The kernel to use for clustering.</param>
     /// <param name="shape">The shape to use on the points to cluster.</param>
     /// <returns>A list of clusters weighted by the contributing points.</returns>
-    public static List<MeanShiftCluster<T, TShape>> Cluster<T, TShape, TKernel>(
+    public static List<MeanShiftCluster<T>> Cluster<T, TShape, TKernel>(
         ReadOnlySpan<T> points,
         ReadOnlySpan<T> field,
         TKernel kernel,
@@ -41,7 +41,7 @@ public static partial class MeanShift
     }
 
     /// <inheritdoc cref="Cluster{T, TShape, TKernel}(ReadOnlySpan{T}, ReadOnlySpan{T}, TKernel, TShape)"/>
-    public static List<MeanShiftCluster<T, TShape>> Cluster<T, TShape, TKernel>(
+    public static List<MeanShiftCluster<T>> Cluster<T, TShape, TKernel>(
         ReadOnlySpan<T> points,
         TKernel kernel,
         TShape shape = default)
@@ -54,7 +54,7 @@ public static partial class MeanShift
     #region Array
 
     /// <inheritdoc cref="Cluster{T, TShape, TKernel}(ReadOnlySpan{T}, ReadOnlySpan{T}, TKernel, TShape)"/>
-    public static List<MeanShiftCluster<T, TShape>> Cluster<T, TShape, TKernel>(
+    public static List<MeanShiftCluster<T>> Cluster<T, TShape, TKernel>(
         T[] points,
         T[] field,
         TKernel kernel,
@@ -64,7 +64,7 @@ public static partial class MeanShift
         where TKernel : struct, IKernel => Cluster<T, TShape, TKernel>(points.AsSpan(), field.AsSpan(), kernel, shape);
 
     /// <inheritdoc cref="Cluster{T, TShape, TKernel}(ReadOnlySpan{T}, ReadOnlySpan{T}, TKernel, TShape)"/>
-    public static List<MeanShiftCluster<T, TShape>> Cluster<T, TShape, TKernel>(
+    public static List<MeanShiftCluster<T>> Cluster<T, TShape, TKernel>(
         T[] points,
         TKernel kernel,
         TShape shape = default)
@@ -79,7 +79,7 @@ public static partial class MeanShift
 #if NET6_0_OR_GREATER
 
     /// <inheritdoc cref="Cluster{T, TShape, TKernel}(ReadOnlySpan{T}, ReadOnlySpan{T}, TKernel, TShape)"/>
-    public static List<MeanShiftCluster<T, TShape>> Cluster<T, TShape, TKernel>(
+    public static List<MeanShiftCluster<T>> Cluster<T, TShape, TKernel>(
         List<T> points,
         List<T> field,
         TKernel kernel,
@@ -89,7 +89,7 @@ public static partial class MeanShift
         where TKernel : struct, IKernel => Cluster<T, TShape, TKernel>(points.AsSpan(), field.AsSpan(), kernel, shape);
 
     /// <inheritdoc cref="Cluster{T, TShape, TKernel}(ReadOnlySpan{T}, ReadOnlySpan{T}, TKernel, TShape)"/>
-    public static List<MeanShiftCluster<T, TShape>> Cluster<T, TShape, TKernel>(
+    public static List<MeanShiftCluster<T>> Cluster<T, TShape, TKernel>(
         List<T> points,
         TKernel kernel,
         TShape shape = default)

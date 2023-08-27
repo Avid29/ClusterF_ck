@@ -105,14 +105,14 @@ public static partial class WeightedMeanShift
     /// <summary>
     /// Takes an array of points and tuples and converts them to <see cref="MeanShiftCluster{T,TShape}"/>s.
     /// </summary>
-    private static List<MeanShiftCluster<T, TShape>> Wrap<T, TShape>((T, double)[] raw)
+    private static List<MeanShiftCluster<T>> Wrap<T, TShape>((T, double)[] raw)
         where T : unmanaged, IEquatable<T>
         where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
     {
-        List<MeanShiftCluster<T, TShape>> clusters = new();
+        List<MeanShiftCluster<T>> clusters = new();
         foreach (var cluster in raw)
         {
-            clusters.Add(new MeanShiftCluster<T, TShape>(cluster.Item1, cluster.Item2));
+            clusters.Add(new MeanShiftCluster<T>(cluster.Item1, cluster.Item2));
         }
 
         return clusters;

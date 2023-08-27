@@ -2,7 +2,7 @@
 
 namespace ClusterF_ck.Kernels;
 
-/// The shape of a triangle distribution
+/// The shape of a linear distribution
 /// 
 ///               *
 ///             *   *
@@ -13,18 +13,18 @@ namespace ClusterF_ck.Kernels;
 ///   *                        *
 ///  -----------------------------
 /// <summary>
-/// A kernel with a triangle falloff.
+/// A kernel with a linear falloff.
 /// </summary>
-public struct TriangleKernel : IKernel
+public struct LinearKernel : IKernel
 {
     private double _windowSquared;
     private double _window;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="TriangleKernel"/> struct.
+    /// Initializes a new instance of the <see cref="LinearKernel"/> struct.
     /// </summary>
     /// <param name="window">The window size of the Kernel.</param>
-    public TriangleKernel(double window)
+    public LinearKernel(double window)
     {
         // These will be set in WindowSize
         _window = 0;

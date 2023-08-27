@@ -21,3 +21,7 @@ KMeansCluster<double, DoubleShape>[] clusters = KM.Cluster<double, DoubleShape>(
 The value of `clusters` will be 3 clusters containing the points `{0, 1}`, `{8, 10, 12}`, and `{22, 24}`. 
 
 The namespace `ClusterF_ck.Shapes` is included because it contains a collection of `ISpace<T>` implementations that can be used to compare points. Currently (as of 2023-08-26), it only contains definitions of Euclidean space for `float`, `double`, `Vector2`, `Vector3`, and `Vector4`. If you want to cluster over a different type or in a Non-Euclidean space, you can always define your own `ISpace<T>`.
+
+## Read More
+
+You can learn more about cluster analysis, the ClusterF_ck interfaces, and fine more samples in the [ClusterF_ck Wiki](https://github.com/Avid29/ClusterF_ck/wiki).

@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 env:
   AZURE_ARTIFACTS_FEED_URL: https://avid29.pkgs.visualstudio.com/ClusterF_ck/_packaging/ClusterF_ck/nuget/v3/index.json  
@@ -11,7 +14,7 @@ env:
   DOTNET_VERSION: '6.x' 
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       # Checkout the repo
@@ -30,8 +33,9 @@ jobs:
           dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}'
           dotnet test --configuration '${{ env.BUILD_CONFIGURATION }}'
 
-  az-artifacts-build-and-deploy:
-    needs: build
+  pack-and-publish:
+    if: ${{github.event_name == 'push'}}
+    needs: build-and-test
     runs-on: ubuntu-latest
     steps:
       # Checkout the repo

@@ -10,7 +10,8 @@ on:
 
 env:
   AZURE_ARTIFACTS_FEED_URL: https://avid29.pkgs.visualstudio.com/ClusterF_ck/_packaging/ClusterF_ck/nuget/v3/index.json  
-  BUILD_CONFIGURATION: 'Release'    # set this to the appropriate build configuration
+  TEST_BUILD_CONFIGURATION: 'Debug'    # This build configuration is used for testing
+  PACK_BUILD_CONFIGURATION: 'Release'  # This build configuration is used for packing and publishing
   DOTNET_VERSION: '6.x' 
 
 jobs:
@@ -30,8 +31,8 @@ jobs:
       - name: dotnet build and test
         run: |
           dotnet restore
-          dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}'
-          dotnet test --configuration '${{ env.BUILD_CONFIGURATION }}'
+          dotnet build --configuration '${{ env.TEST_BUILD_CONFIGURATION }}'
+          dotnet test --configuration '${{ env.TEST_BUILD_CONFIGURATION }}'
 
   pack-and-publish:
     if: ${{github.event_name == 'push'}}
@@ -54,8 +55,8 @@ jobs:
       - name: dotnet build and publish
         run: |
           dotnet restore
-          dotnet build --configuration '${{ env.BUILD_CONFIGURATION }}'
-          dotnet pack -c '${{ env.BUILD_CONFIGURATION }}' --version-suffix $GITHUB_RUN_ID --output ./artifacts
+          dotnet build --configuration '${{ env.PACK_BUILD_CONFIGURATION }}'
+          dotnet pack -c '${{ env.PACK_BUILD_CONFIGURATION }}' --version-suffix $GITHUB_RUN_ID --output ./artifacts
 
       # Publish the package to Azure Artifacts
       - name: 'dotnet publish'

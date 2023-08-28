@@ -6,6 +6,5 @@
 	  <GenerateDocumentationFile>false</GenerateDocumentationFile>
 	  <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 	  <IsPackable>false</IsPackable>
-	  <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 </Project>

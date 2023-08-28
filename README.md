@@ -2,6 +2,8 @@
 
 ClusterF_ck is a .NET Cluster Analysis library. It contains a wide variety of algorithms for Cluster Analysis, and their varieties. 
 
+<sub>ClusterF_ck is prounced Cluster F. U. C. K. (The U stands for underline).</sub>
+
 ## Samples
 
 ### KMeans

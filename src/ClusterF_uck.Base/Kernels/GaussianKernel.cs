@@ -19,8 +19,8 @@ namespace ClusterF_ck.Kernels;
 /// </summary>
 public struct GaussianKernel : IKernel
 {
-    private double _denominatorBandwidth;
     private double _bandwidth;
+    private double _denominatorBandwidth;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GaussianKernel"/> struct.

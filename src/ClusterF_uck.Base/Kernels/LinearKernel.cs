@@ -10,8 +10,8 @@ namespace ClusterF_ck.Kernels;
 ///         *           *
 ///       *                *
 ///     *                    *
-///   *                        *
-///  -----------------------------
+/// * *                        * *
+/// ------------------------------
 /// <summary>
 /// A kernel with a linear falloff.
 /// </summary>

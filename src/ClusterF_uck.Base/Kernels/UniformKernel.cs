@@ -4,13 +4,12 @@ namespace ClusterF_ck.Kernels;
 
 /// The shape of a Uniform Distribution
 ///
-/// 
-///        * * * * * * * * *
-///        *               *
-///        *               *
-///        *               *
-///        *               *
-///  -----------------------------
+///     * * * * * * * * *
+///     *               *
+///     *               *
+///     *               *
+/// * * *               * * * 
+/// -------------------------
 /// <summary>
 /// A Kernel with a rectangular shape and flat cutoff on its window size.
 /// </summary>

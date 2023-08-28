@@ -9,7 +9,6 @@ namespace ClusterF_ck.MeanShift;
 /// A <see cref="Cluster{T}"/> implementation for the MeanShift algorithm.
 /// </summary>
 /// <typeparam name="T">The type of points in the cluster.</typeparam>
-/// <typeparam name="TShape">A shape to describe to provide comparison methods for <typeparamref name="T"/>.</typeparam>
 public class MeanShiftCluster<T> : Cluster<T>, ICentroidCluster<T>, IWeightedCluster
 {
     /// <summary>

@@ -3,8 +3,8 @@
 using ClusterF_ck.Kernels;
 using ClusterF_ck.Spaces.Properties;
 using CommunityToolkit.HighPerformance;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 
 namespace ClusterF_ck.MeanShift;
 
@@ -37,7 +37,7 @@ public static partial class MeanShift
         where TKernel : struct, IKernel
     {
         (T, int)[] raw = ClusterRaw(points, field, kernel, shape);
-        return Wrap<T, TShape>(raw);
+        return Wrap(raw);
     }
 
     /// <inheritdoc cref="Cluster{T, TShape, TKernel}(ReadOnlySpan{T}, ReadOnlySpan{T}, TKernel, TShape)"/>

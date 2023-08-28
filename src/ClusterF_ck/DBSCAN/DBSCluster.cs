@@ -2,7 +2,6 @@
 
 using ClusterF_ck.IO;
 using ClusterF_ck.IO.Interfaces;
-using ClusterF_ck.Spaces.Properties;
 using System.Collections.Generic;
 
 namespace ClusterF_ck.DBSCAN;

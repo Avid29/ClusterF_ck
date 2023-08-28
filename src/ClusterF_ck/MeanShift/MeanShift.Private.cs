@@ -83,32 +83,31 @@ public static partial class MeanShift
         where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
         where TKernel : struct, IKernel
     {
-        // Points will bed cloned into a modifiable list of clusters
+        // Points will be cloned into a modifiable list of clusters
         T[] clusters = new T[points.Length];
 
         // This array will be reused on every iteration
         // However we allocate it here once to save on allocation time and space
         (T, double)[] fieldWeights = new (T, double)[field.Length];
         
-            // Shift each cluster to its convergence point.
-            for (int i = 0; i < clusters.Length; i++)
-            {
-                T point = points[i];
-                T cluster = MeanShiftPoint(point, field, shape, kernel, fieldWeights);
-                clusters[i] = cluster;
+        // Shift each cluster to its convergence point.
+        for (int i = 0; i < clusters.Length; i++)
+        {
+            T point = points[i];
+            T cluster = MeanShiftPoint(point, field, shape, kernel, fieldWeights);
+            clusters[i] = cluster;
 
-                // TODO: Track points in the cluster
-            }
+            // TODO: Track points in the cluster
+        }
 
         return PostProcess<T, TShape, TKernel>(clusters.AsSpan(), kernel, shape);
     }
 
     /// <summary>
-    /// Takes an array of points and tuples and converts them to <see cref="MeanShiftCluster{T,TShape}"/>s.
+    /// Takes an array of points and tuples and converts them to <see cref="MeanShiftCluster{T}"/>s.
     /// </summary>
-    private static List<MeanShiftCluster<T>> Wrap<T, TShape>((T, int)[] raw)
+    private static List<MeanShiftCluster<T>> Wrap<T>((T, int)[] raw)
         where T : IEquatable<T>
-        where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
     {
         List<MeanShiftCluster<T>> clusters = new();
         foreach (var cluster in raw)

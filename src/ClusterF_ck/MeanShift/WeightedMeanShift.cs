@@ -38,7 +38,7 @@ public static partial class WeightedMeanShift
         TShape shape = default)
         where T : unmanaged, IEquatable<T>
         where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
-        where TKernel : struct, IKernel => Wrap<T, TShape>(ClusterRaw(points, field, kernel, shape));
+        where TKernel : struct, IKernel => Wrap(ClusterRaw(points, field, kernel, shape));
 
 
     /// <inheritdoc cref="WeightedMeanShift.Cluster"/>

@@ -3,6 +3,7 @@
 using ClusterF_ck.Spaces.Properties;
 using System.Collections.Generic;
 using System;
+using CommunityToolkit.Diagnostics;
 
 namespace ClusterF_ck.DBSCAN;
 
@@ -50,7 +51,10 @@ public static class DBSCAN
         // Noise cluster is not null in this condition.
         if (context.ReturnNoise)
         {
-            clusters.Add(context.NoiseCluster!);
+            // Noise cluster should not be null when returning noise
+            Guard.IsNotNull(context.NoiseCluster);
+
+            clusters.Add(context.NoiseCluster);
         }
 
         return clusters;
@@ -121,6 +125,11 @@ public static class DBSCAN
                         // If unclassified, add to search queue
                         if (iPId == DBSConstants.UNCLASSIFIED_ID)
                             seeds.Add(iP);
+
+                        // Remove from noise if classified as noise.
+                        // TODO: Should noise be a hash set so this is cheaper?
+                        if (iPId == DBSConstants.NOISE_ID)
+                            context.NoiseCluster?.Points.Remove(iP.Item1);
 
                         cluster.Points.Add(iP.Item1);
                         iPId = cluster.ClusterId;

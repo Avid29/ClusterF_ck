@@ -1,8 +1,8 @@
 ﻿// Adam Dernis © 2022
 
-using ClusterF_ck.Spaces.Properties;
+using ClusterF_ck.Spaces.Interfaces.Properties;
 
-namespace ClusterF_ck.Shapes.Wrapper;
+namespace ClusterF_ck.Spaces.Wrapper;
 
 /// <summary>
 /// A shape for wrapping a paired point list to cluster in a metric space. 

@@ -1,9 +1,9 @@
 ﻿// Adam Dernis © 2022
 
-using ClusterF_ck.Spaces;
+using ClusterF_ck.Spaces.Interfaces;
 using System;
 
-namespace ClusterF_ck.Shapes
+namespace ClusterF_ck.Spaces
 {
     /// <summary>
     /// A shape defining how to handle <see cref="double"/>s in a geometric space.
@@ -42,7 +42,7 @@ namespace ClusterF_ck.Shapes
 
         /// <inheritdoc/>
         public readonly double GetCellOrigin(int cell)
-            => (cell * Window);
+            => cell * Window;
 
         /// <inheritdoc/>
         public double WeightedAverage((double, double)[] items)

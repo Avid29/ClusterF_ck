@@ -1,6 +1,8 @@
 ﻿// Adam Dernis © 2023
 
-namespace ClusterF_ck.Spaces.Properties;
+using ClusterF_ck.Spaces.Interfaces;
+
+namespace ClusterF_ck.Spaces.Interfaces.Properties;
 
 /// <summary>
 /// An <see cref="ISpace{T}"/> where the weighted average of a set of objects can be taken.

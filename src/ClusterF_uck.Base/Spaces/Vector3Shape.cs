@@ -1,28 +1,26 @@
 ﻿// Adam Dernis © 2022
 
-using ClusterF_ck.Spaces;
+using ClusterF_ck.Spaces.Interfaces;
 using System.Numerics;
 
-namespace ClusterF_ck.Shapes
+namespace ClusterF_ck.Spaces
 {
     /// <summary>
-    /// A shape defining how to handle <see cref="Vector4"/>s in a geometric space.
+    /// A shape defining how to handle <see cref="Vector3"/>s in a geometric space.
     /// </summary>
-    public struct Vector4Shape : IGeometricSpace<Vector4, (int, int, int, int)>
+    public struct Vector3Shape : IGeometricSpace<Vector3, (int, int, int)>
     {
         /// <inheritdoc/>
         public double Window { get; set; }
 
         /// <inheritdoc/>
-        public bool AreEqual(Vector4 it1, Vector4 it2)
-        {
-            return it1 == it2;
-        }
+        public bool AreEqual(Vector3 it1, Vector3 it2)
+            => it1 == it2;
 
         /// <inheritdoc/>
-        public Vector4 Average(Vector4[] items)
+        public Vector3 Average(Vector3[] items)
         {
-            Vector4 sumVector = Vector4.Zero;
+            Vector3 sumVector = Vector3.Zero;
             foreach (var item in items)
             {
                 sumVector += item;
@@ -32,29 +30,29 @@ namespace ClusterF_ck.Shapes
         }
 
         /// <inheritdoc/>
-        public double FindDistanceSquared(Vector4 it1, Vector4 it2)
+        public double FindDistanceSquared(Vector3 it1, Vector3 it2)
         {
             return (it1 - it2).LengthSquared();
         }
 
         /// <inheritdoc/>
-        public (int, int, int, int) GetCell(Vector4 value)
+        public (int, int, int) GetCell(Vector3 value)
         {
             var cell = value / (float)Window;
-            return ((int)cell.W, (int)cell.X, (int)cell.Y, (int)cell.Z);
+            return ((int)cell.X, (int)cell.Y, (int)cell.Z);
         }
 
         /// <inheritdoc/>
-        public Vector4 GetCellOrigin((int, int, int, int) cell)
+        public Vector3 GetCellOrigin((int, int, int) cell)
         {
-            Vector4 cellScale = new(cell.Item1, cell.Item2, cell.Item3, cell.Item4);
+            Vector3 cellScale = new(cell.Item1, cell.Item2, cell.Item3);
             return cellScale * (float)Window;
         }
 
         /// <inheritdoc/>
-        public Vector4 WeightedAverage((Vector4, double)[] items)
+        public Vector3 WeightedAverage((Vector3, double)[] items)
         {
-            Vector4 sumVector = Vector4.Zero;
+            Vector3 sumVector = Vector3.Zero;
             double totalWeight = 0;
             foreach (var item in items)
             {

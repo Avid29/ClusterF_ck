@@ -1,9 +1,9 @@
 ﻿// Adam Dernis © 2022
 
-using ClusterF_ck.Spaces;
+using ClusterF_ck.Spaces.Interfaces;
 using System;
 
-namespace ClusterF_ck.Shapes
+namespace ClusterF_ck.Spaces
 {
     /// <summary>
     /// A shape defining how to handle <see cref="float"/>s in a geometric space.

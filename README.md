@@ -27,3 +27,5 @@ The namespace `ClusterF_ck.Shapes` is included because it contains a collection 
 ## Read More
 
 You can learn more about cluster analysis, the ClusterF_ck interfaces, and fine more samples in the [ClusterF_ck Wiki](https://github.com/Avid29/ClusterF_ck/wiki).
+
+### [Read about The Whole God D_mn Thing](https://github.com/Avid29/ClusterF_ck/wiki/The-Whole-God-D_mn-thing)

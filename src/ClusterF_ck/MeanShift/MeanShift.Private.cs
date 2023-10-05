@@ -127,12 +127,11 @@ public static partial class MeanShift
         where TShape : struct, IDistanceSpace<T>, IWeightedAverageSpace<T>
         where TKernel : struct, IKernel
     {
-        bool changed = true;
-
+        Unsafe.SkipInit(out bool changed);
         Unsafe.SkipInit(out T newCluster);
 
         // Shift point until it converges
-        while (changed)
+        do
         {
             // Determine weight of all field points from the cluster's current position.
             for (int i = 0; i < field.Length; i++)
@@ -146,7 +145,7 @@ public static partial class MeanShift
             newCluster = shape.WeightedAverage(fieldWeights);
             changed = !shape.AreEqual(newCluster, cluster, ACCEPTED_ERROR);
             cluster = newCluster;
-        }
+        } while (changed);
 
         return cluster;
     }

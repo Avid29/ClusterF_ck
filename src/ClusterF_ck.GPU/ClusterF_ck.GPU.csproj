@@ -11,4 +11,9 @@
     <PackageReference Include="ComputeSharp.Dynamic" Version="2.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ClusterF_ck\ClusterF_ck.csproj" />
+    <ProjectReference Include="..\ClusterF_uck.Base\ClusterF_ck.Base.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,7 +1,7 @@
 <Project>
   <!--Build Properties-->
   <PropertyGroup>
-	  <LangVersion>10.0</LangVersion>
+	  <LangVersion>12.0</LangVersion>
 	  <Nullable>enable</Nullable>
 	  <GenerateDocumentationFile>false</GenerateDocumentationFile>
 	  <GeneratePackageOnBuild>false</GeneratePackageOnBuild>

@@ -30,5 +30,8 @@ namespace ClusterF_ck.Tests.Data.DataSet
             new("Vector2 Test 1",
             new Vector2(0, 2), new Vector2(1, 1), new Vector2(2, 0),
             new Vector2(7, 5), new Vector2(5, 7), new Vector2(6, 6));
+
+        public static FixedSet<float> NaN_Test1 =
+            new("NaN Test 1", float.NaN, 0f);
     }
 }

@@ -29,5 +29,14 @@ namespace ClusterF_ck.Tests.MeanShift
 
             Run<Vector2, Vector2Shape, GaussianKernel>(data, kernel);
         }
+
+        [TestMethod("NaN Test")]
+        public void NaNTest()
+        {
+            var data = FixedSets.NaN_Test1;
+            var kernel = new GaussianKernel(5);
+
+            Run<float, FloatShape, GaussianKernel>(data, kernel, expectFail: true);
+        }
     }
 }

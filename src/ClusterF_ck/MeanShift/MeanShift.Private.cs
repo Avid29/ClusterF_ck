@@ -4,6 +4,7 @@ using ClusterF_ck.DBSCAN;
 using ClusterF_ck.Kernels;
 using ClusterF_ck.Shapes.Wrapper;
 using ClusterF_ck.Spaces.Properties;
+using CommunityToolkit.Diagnostics;
 using Microsoft.Collections.Extensions;
 using System;
 using System.Collections.Generic;
@@ -141,6 +142,12 @@ public static partial class MeanShift
                 double distanceSquared = shape.FindDistanceSquared(cluster, point);
                 double weight = kernel.WeightDistance(distanceSquared);
                 fieldWeights[i] = (point, weight);
+
+                if (double.IsNaN(weight))
+                {
+                    // TODO: Improve message
+                    ThrowHelper.ThrowArgumentOutOfRangeException($"Weighted distance was invalid as invalid {double.NaN}");
+                }
             }
 
             newCluster = shape.WeightedAverage(fieldWeights);

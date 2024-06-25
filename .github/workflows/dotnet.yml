@@ -12,7 +12,7 @@ env:
   AZURE_ARTIFACTS_FEED_URL: https://avid29.pkgs.visualstudio.com/ClusterF_ck/_packaging/ClusterF_ck/nuget/v3/index.json  
   TEST_BUILD_CONFIGURATION: 'Debug'    # This build configuration is used for testing
   PACK_BUILD_CONFIGURATION: 'Release'  # This build configuration is used for packing and publishing
-  DOTNET_VERSION: '6.x' 
+  DOTNET_VERSION: '8.x' 
 
 jobs:
   build-and-test:

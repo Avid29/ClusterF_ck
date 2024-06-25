@@ -1,5 +1,7 @@
 ﻿// Adam Dernis © 2022
 
+using ClusterF_ck.Spaces.Interfaces.Properties;
+
 namespace ClusterF_ck.Spaces.Properties;
 
 /// <summary>

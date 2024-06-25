@@ -1,7 +1,7 @@
 ﻿// Adam Dernis © 2023
 
 using ClusterF_ck.IO.Interfaces;
-using ClusterF_ck.Spaces.Properties;
+using ClusterF_ck.Spaces.Interfaces.Properties;
 using CommunityToolkit.Diagnostics;
 using CommunityToolkit.HighPerformance;
 using System;

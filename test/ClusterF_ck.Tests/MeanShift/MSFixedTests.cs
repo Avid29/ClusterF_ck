@@ -1,7 +1,7 @@
 ﻿// Adam Dernis © 2022
 
 using ClusterF_ck.Kernels;
-using ClusterF_ck.Shapes;
+using ClusterF_ck.Spaces;
 using ClusterF_ck.Tests.Data.DataSet;
 using ClusterF_ck.Tests.MeanShift.Abstract;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

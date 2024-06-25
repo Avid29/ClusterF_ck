@@ -1,8 +1,8 @@
 ﻿// Adam Dernis © 2022
 
-using ClusterF_ck.Spaces.Properties;
+using ClusterF_ck.Spaces.Interfaces.Properties;
 
-namespace ClusterF_ck.Spaces;
+namespace ClusterF_ck.Spaces.Interfaces;
 
 /// <summary>
 /// An <see cref="ISpace{T}"/> for geometric points in a cluster.

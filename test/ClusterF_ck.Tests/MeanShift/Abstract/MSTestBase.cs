@@ -2,7 +2,7 @@
 
 using ClusterF_ck.Kernels;
 using ClusterF_ck.MeanShift;
-using ClusterF_ck.Spaces.Properties;
+using ClusterF_ck.Spaces.Interfaces.Properties;
 using ClusterF_ck.Tests.Data.DataSet.Abstract;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MS = ClusterF_ck.MeanShift.MeanShift;

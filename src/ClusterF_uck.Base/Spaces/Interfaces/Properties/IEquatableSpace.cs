@@ -1,6 +1,8 @@
 ﻿// Adam Dernis © 2022
 
-namespace ClusterF_ck.Spaces.Properties;
+using ClusterF_ck.Spaces.Interfaces;
+
+namespace ClusterF_ck.Spaces.Interfaces.Properties;
 
 /// <summary>
 /// An <see cref="ISpace{T}"/> where objects can be considered equal.

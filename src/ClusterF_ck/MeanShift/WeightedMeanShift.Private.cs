@@ -2,8 +2,9 @@
 
 using ClusterF_ck.DBSCAN;
 using ClusterF_ck.Kernels;
-using ClusterF_ck.Shapes.Wrapper;
+using ClusterF_ck.Spaces.Interfaces.Properties;
 using ClusterF_ck.Spaces.Properties;
+using ClusterF_ck.Spaces.Wrapper;
 using Microsoft.Collections.Extensions;
 using System;
 using System.Collections.Generic;

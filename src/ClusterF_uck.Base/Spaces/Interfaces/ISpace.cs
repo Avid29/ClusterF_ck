@@ -1,6 +1,6 @@
 ﻿// Adam Dernis © 2022
 
-namespace ClusterF_ck.Spaces;
+namespace ClusterF_ck.Spaces.Interfaces;
 
 /// <summary>
 /// The base interface for defining a space.

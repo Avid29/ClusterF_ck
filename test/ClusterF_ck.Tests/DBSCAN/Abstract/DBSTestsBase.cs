@@ -1,7 +1,7 @@
 ﻿// Adam Dernis © 2022
 
 using ClusterF_ck.DBSCAN;
-using ClusterF_ck.Spaces.Properties;
+using ClusterF_ck.Spaces.Interfaces.Properties;
 using ClusterF_ck.Tests.Data.DataSet.Abstract;
 using DBS = ClusterF_ck.DBSCAN.DBSCAN;
 
